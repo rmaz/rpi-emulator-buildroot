@@ -1,0 +1,20 @@
+config BR2_PACKAGE_QT5DECLARATIVE
+	bool "qt5declarative"
+	select BR2_PACKAGE_QT5XMLPATTERNS
+	select BR2_PACKAGE_QT5BASE
+	select BR2_PACKAGE_QT5BASE_GUI
+	select BR2_PACKAGE_QT5BASE_EGLFS
+	depends on BR2_PACKAGE_HAS_LIBEGL
+	depends on BR2_PACKAGE_HAS_LIBGLES
+	depends on BR2_PACKAGE_QT5_JSCORE_AVAILABLE
+	help
+	  Qt is a cross-platform application and UI framework for
+	  developers using C++.
+
+	  This package corresponds to the qt5declarative module.
+
+	  http://qt-project.org
+
+comment "qt5declarative requires an OpenGL-capable backend"
+	depends on (!BR2_PACKAGE_HAS_LIBEGL || !BR2_PACKAGE_HAS_LIBGLES) && \
+		BR2_PACKAGE_QT5_JSCORE_AVAILABLE
