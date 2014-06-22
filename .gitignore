@@ -1,3 +1,9 @@
+# Buildroot stuff
+dl/
+output/
+.config*
+..config*
+
 # Object files
 *.o
 *.ko
