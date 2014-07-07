@@ -16,8 +16,8 @@ define ARMSNES_BUILD_CMDS
 endef
 
 define ARMSNES_INSTALL_TARGET_CMDS
-	mkdir -p $(TARGET_DIR)/usr/share/libretro-cores
-	$(INSTALL) $(@D)/$(ARMSNES_TARGET) $(TARGET_DIR)/usr/share/libretro-cores
+	$(INSTALL) -D $(@D)/$(ARMSNES_TARGET) \
+		$(TARGET_DIR)/usr/lib/libretro/$(ARMSNES_TARGET)
 endef
 
 $(eval $(generic-package))
