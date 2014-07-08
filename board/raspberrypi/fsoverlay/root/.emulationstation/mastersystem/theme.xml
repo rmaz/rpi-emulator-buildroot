@@ -1,0 +1,92 @@
+<theme>
+	<listPrimaryColor>000000</listPrimaryColor>
+	<descColor>000000</descColor>
+	<listSelectorColor>EE0000</listSelectorColor>
+	<hideHeader />
+	<hideDividers />
+	<listLeftAlign />
+
+        <listFont>
+            <path>./../general_art/pixeljosh6.ttf</path>
+            <size>0.04</size>
+        </listFont>        
+        <descriptionFont>
+            <path>./../general_art/pixeljosh6.ttf</path>
+            <size>0.03</size>
+        </descriptionFont>        
+
+	<gameImagePos>$infoWidth/2 0.1</gameImagePos>
+
+        <menuScrollSound>./../sounds/GS25.wav</menuScrollSound>
+        <menuSelectSound>./../sounds/GS42.wav</menuSelectSound>
+        <menuBackSound>./../sounds/GS28.wav</menuBackSound>
+        <menuOpenSound>./../sounds/SNES5.wav</menuOpenSound>
+
+        <fastSelectColor>FFFFFF</fastSelectColor>
+        <boxBackground>./../general_art/darkgrey.png</boxBackground>
+        <fastSelectFont>
+            <path>./../general_art/pixeljosh6.ttf</path>
+            <size>0.15</size>
+        </fastSelectFont>        
+
+        <component>
+                <type>image</type>
+                <path>./mastersystem_art/mastersystem_bg.png</path>
+                <pos>0 0</pos>
+                <dim>1 1</dim>
+		<tiled />
+        </component>
+
+        <component>
+                <type>image</type>
+                <path>./mastersystem_art/mastersystem_logo.png</path>
+                <pos>.25 .02</pos>
+                <dim>.3 0</dim>
+		<origin>.5 0</origin>
+		<useAlpha />
+        </component>
+</theme>
+
+<basicTheme>
+	<listPrimaryColor>000000</listPrimaryColor>
+	<listSecondaryColor>23429E</listSecondaryColor>
+	<listSelectorColor>EE0000</listSelectorColor>
+	<hideHeader />
+
+    <listFont>
+        <path>./../general_art/pixeljosh6.ttf</path>
+        <size>0.04</size>
+    </listFont>        
+    <descriptionFont>
+        <path>./../general_art/pixeljosh6.ttf</path>
+        <size>0.03</size>
+    </descriptionFont>        
+
+    <menuScrollSound>./../sounds/GS25.wav</menuScrollSound>
+    <menuSelectSound>./../sounds/GS42.wav</menuSelectSound>
+    <menuBackSound>./../sounds/GS28.wav</menuBackSound>
+    <menuOpenSound>./../sounds/SNES5.wav</menuOpenSound>
+
+    <fastSelectColor>FFFFFF</fastSelectColor>
+    <boxBackground>./../general_art/darkgrey.png</boxBackground>
+    <fastSelectFont>
+        <path>./../general_art/pixeljosh6.ttf</path>
+        <size>0.15</size>
+    </fastSelectFont>        
+
+	<component>
+		<type>image</type>
+		<path>./mastersystem_art/mastersystem_bg.png</path>
+		<pos>0 0</pos>
+		<dim>1 1</dim>
+		<tiled />
+	</component>
+
+	<component>
+		<type>image</type>
+		<path>./mastersystem_art/mastersystem_logo.png</path>
+		<pos>0.5 0</pos>
+		<dim>0 0.15</dim>
+		<origin>0.5 0</origin>
+	</component>
+</basicTheme>

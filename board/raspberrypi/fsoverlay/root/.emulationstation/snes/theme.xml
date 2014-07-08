@@ -1,0 +1,141 @@
+<theme>
+	<listPrimaryColor>E4E1E5</listPrimaryColor>
+	<descColor>48474D</descColor>
+	<listSelectorColor>fc0c18</listSelectorColor>
+	<hideHeader />
+	<hideDividers />
+	<listLeftAlign />
+
+    <listFont>
+        <path>./../general_art/pixeljosh6.ttf</path>
+        <size>0.04</size>
+    </listFont>        
+    <descriptionFont>
+        <path>./../general_art/pixeljosh6.ttf</path>
+        <size>0.03</size>
+    </descriptionFont>        
+
+    <menuScrollSound>./../sounds/GS25.wav</menuScrollSound>
+    <menuSelectSound>./../sounds/GS42.wav</menuSelectSound>
+    <menuBackSound>./../sounds/GS28.wav</menuBackSound>
+    <menuOpenSound>./../sounds/SNES5.wav</menuOpenSound>
+
+    <fastSelectColor>FFFFFF</fastSelectColor>
+    <boxBackground>./../general_art/darkgrey.png</boxBackground>
+    <fastSelectFont>
+        <path>./../general_art/pixeljosh6.ttf</path>
+        <size>0.15</size>
+    </fastSelectFont>        
+
+	<gameImagePos>$infoWidth/2 0.18</gameImagePos>
+	<gameImageDim>$infoWidth 0</gameImageDim>
+	<gameImageOrigin>0.5 0</gameImageOrigin>
+
+    <component>
+        <type>image</type>
+        <path>./snes_art/snes_bg.png</path>
+        <pos>0 0</pos>
+        <dim>1 1</dim>
+        <tiled />       
+    </component>
+
+    <component>
+        <type>image</type>
+        <path>./../general_art/black.png</path>
+        <pos>0 0</pos>
+        <dim>1 0.155</dim>
+        <tiled />       
+    </component>
+
+    <component>
+        <type>image</type>
+        <path>./snes_art/snes_logo_dots.png</path>
+        <pos>0.35 0.02</pos>
+        <dim>0 0.125</dim>
+        <origin>1 0</origin>    
+    </component>
+
+    <component>
+            <type>image</type>
+            <path>./snes_art/snes_logo.png</path>
+            <pos>0 0</pos>
+            <dim>.5 0</dim>
+    <origin>0 0</origin>
+    <useAlpha />
+    </component>
+
+    <component>
+        <type>image</type>
+        <path>./../general_art/black.png</path>
+        <pos>0 0.95</pos>
+        <dim>1 0.05</dim>
+        <tiled />       
+    </component>   
+
+</theme>
+
+<basicTheme>
+	<listPrimaryColor>FFFFFF</listPrimaryColor>	
+	<listSelectorColor>000000</listSelectorColor>
+	<hideHeader />
+	<hideDividers />
+
+    <listFont>
+        <path>./../general_art/Gobold.ttf</path>
+        <size>0.04</size>
+    </listFont>        
+    <descriptionFont>
+        <path>./../general_art/Gobold.ttf</path>
+        <size>0.03</size>
+    </descriptionFont>        
+
+    <menuScrollSound>./../sounds/GS25.wav</menuScrollSound>
+    <menuSelectSound>./../sounds/GS42.wav</menuSelectSound>
+    <menuBackSound>./../sounds/GS28.wav</menuBackSound>
+    <menuOpenSound>./../sounds/SNES5.wav</menuOpenSound>
+
+    <fastSelectColor>FFFFFF</fastSelectColor>
+    <boxBackground>./../general_art/darkgrey.png</boxBackground>
+    <fastSelectFont>
+        <path>./../general_art/Gobold.ttf</path>
+        <size>0.15</size>
+    </fastSelectFont>        
+
+    <component>
+        <type>image</type>
+        <path>./snes_art/snes_bg.png</path>
+        <pos>0 0</pos>
+        <dim>0 0</dim>       
+    </component>
+
+    <component>
+        <type>image</type>
+        <path>./../general_art/arrow_white.png</path>
+        <pos>0 0</pos>
+        <dim>0 0</dim>     
+    </component>   
+
+    <component>
+	<type>image</type>
+	<path>./snes_art/snes_logo.png</path>
+	<pos>0.5 0</pos>
+	<dim>0 0</dim>
+	<origin>0.5 0</origin>
+    </component>
+
+    <component>
+        <type>image</type>
+        <path>./../general_art/black_point.png</path>
+        <pos>0 0.935</pos>
+        <dim>0 0</dim>      
+    </component>   
+
+    <component>
+        <type>image</type>
+        <path>./snes_art/snes_point_white.png</path>
+        <pos>0.5 0.957</pos>
+        <dim>0 0</dim>  
+	<origin>0.5 0</origin>    
+    </component>   
+
+</basicTheme>
