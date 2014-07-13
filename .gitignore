@@ -1,8 +1,7 @@
 # Buildroot stuff
 dl/
 output/
-.config*
-..config*
+.config.*
 
 # Object files
 *.o
