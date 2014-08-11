@@ -94,6 +94,7 @@ define RETROARCH_CONFIGURE_CMDS
 		$(TARGET_CONFIGURE_OPTS) \
 		CFLAGS="$(TARGET_CFLAGS)" \
 		LDFLAGS="$(TARGET_LDFLAGS) -lc" \
+		CROSS_COMPILE="jarrrrr" \
 		./configure \
 		--prefix=/usr \
 		$(RETROARCH_CONF_OPT) \
