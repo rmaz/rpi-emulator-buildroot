@@ -23,5 +23,7 @@ If you want to add some packages, you should check section 7 in the manual, it i
 4. Run `make menuconfig` and pick your new package in the menu, then `make`.
 5. After fixing about 1000000 build errors, you should finally have your package, happy days.
 
+There are some more detailed installation instructions on the [wiki](https://github.com/rmaz/rpi-emulator-buildroot/wiki/Installation).
+
 ## Contributing
 If you add any more libretro cores or any other interesting packages, just send a pull request and I'll merge them in. boom.
