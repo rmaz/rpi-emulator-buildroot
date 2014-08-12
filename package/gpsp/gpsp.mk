@@ -9,6 +9,7 @@ GPSP_DEPENDENCIES = sdl
 
 define GPSP_BUILD_CMDS
 	$(MAKE) CC="$(TARGET_CC)" CXX="$(TARGET_CXX)" \
+		SDL_CONFIG="$(STAGING_DIR)/usr/bin/sdl-config" \
 		CFLAGS="$(TARGET_CFLAGS)" \
 		-C $(@D)/raspberrypi all
 endef

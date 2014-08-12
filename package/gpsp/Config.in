@@ -5,4 +5,4 @@ config BR2_PACKAGE_GPSP
           A Gameboy Advance emulator.
 
 comment "gpsp depends on SDL"
-	depends on !(BR2_PACKAGE_HAS_SDL)
+	depends on !BR2_PACKAGE_SDL
