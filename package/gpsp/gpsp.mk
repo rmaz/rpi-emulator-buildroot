@@ -9,8 +9,9 @@ GPSP_DEPENDENCIES = sdl
 SDL_CONFIG=$(STAGING_DIR)/usr/bin/sdl-config
 SDL_FLAGS=`$(SDL_CONFIG) --cflags`
 SDL_LIBS=`$(SDL_CONFIG) --libs`
-GPSP_CFLAGS= -DARM_ARCH -DRPI_BUILD -Wall -Ofast -mfpu=vfp -mfloat-abi=hard -march=armv6j -fgnu89-inline $(SDL_FLAGS) -I$(STAGING_DIR)/usr/include -I$(STAGING_DIR)/usr/include/interface/vcos/pthreads -I$(STAGING_DIR)/usr/include/interface/vmcs_host/linux
-GPSP_LIBS= -ldl -lpthread -lz -L$(STAGING_DIR)/usr/lib $(SDL_LIBS) -lGLESv2 -lEGL -lopenmaxil -lbcm_host -lvcos -lvchiq_arm  -lrt
+GPSP_INCLUDES=-I$(STAGING_DIR)/usr/include -I$(STAGING_DIR)/usr/include/interface/vcos/pthreads -I$(STAGING_DIR)/usr/include/interface/vmcs_host/linux
+GPSP_CFLAGS= -DARM_ARCH -DRPI_BUILD -Wall -Ofast -mfpu=vfp -mfloat-abi=hard -march=armv6j -fgnu89-inline $(SDL_FLAGS) $(GPSP_INCLUDES)
+GPSP_LIBS= -ldl -lpthread -lz -L$(STAGING_DIR)/usr/lib $(SDL_LIBS) -lGLESv2 -lEGL -lopenmaxil -lbcm_host -lvcos -lvchiq_arm  -lrt -lvchostif
 
 define GPSP_BUILD_CMDS
 	$(MAKE) CC="$(TARGET_CC)" \
@@ -20,7 +21,7 @@ define GPSP_BUILD_CMDS
 endef
 
 define GPSP_INSTALL_TARGET_CMDS
-	$(INSTALL) -D $(@D)/gpsp \
+	$(INSTALL) -D $(@D)/raspberrypi/gpsp \
 		$(TARGET_DIR)/usr/emulators/gpsp
 endef
 
