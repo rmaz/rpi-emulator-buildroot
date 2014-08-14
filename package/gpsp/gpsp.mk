@@ -22,7 +22,9 @@ endef
 
 define GPSP_INSTALL_TARGET_CMDS
 	$(INSTALL) -D $(@D)/raspberrypi/gpsp \
-		$(TARGET_DIR)/usr/emulators/gpsp
+		$(TARGET_DIR)/usr/emulators/gba/gpsp
+	$(INSTALL) -D $(@D)/game_config.txt \
+		$(TARGET_DIR)/usr/emulators/gba/game_config.txt
 endef
 
 $(eval $(generic-package))
