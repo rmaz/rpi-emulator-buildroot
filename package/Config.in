@@ -162,18 +162,21 @@ endmenu
 menu "Games"
 	source "package/doom-wad/Config.in"
 	source "package/emulation-station/Config.in"
-	source "package/gnuchess/Config.in"
-	source "package/lbreakout2/Config.in"
-	source "package/ltris/Config.in"
-	source "package/opentyrian/Config.in"
-	source "package/opentyrian-data/Config.in"
-	source "package/prboom/Config.in"
+menu "Emulators"
+	source "package/gpsp/Config.in"
 	source "package/retroarch/Config.in"
 if BR2_PACKAGE_RETROARCH
 menu "Libretro Cores"
 	source "package/armsnes/Config.in"
 endmenu
 endif
+endmenu
+	source "package/gnuchess/Config.in"
+	source "package/lbreakout2/Config.in"
+	source "package/ltris/Config.in"
+	source "package/opentyrian/Config.in"
+	source "package/opentyrian-data/Config.in"
+	source "package/prboom/Config.in"
 	source "package/rubix/Config.in"
 endmenu
 
