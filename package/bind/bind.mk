@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-BIND_VERSION = 9.9.5
+BIND_VERSION = 9.9.5-P1
 BIND_SITE = ftp://ftp.isc.org/isc/bind9/$(BIND_VERSION)
 BIND_INSTALL_STAGING = YES
 BIND_CONFIG_SCRIPTS = bind9-config isc-config.sh
@@ -41,6 +41,8 @@ endif
 
 ifeq ($(BR2_PACKAGE_OPENSSL),y)
 	BIND_DEPENDENCIES += openssl
+	BIND_CONF_ENV += ac_cv_func_EVP_sha256=yes \
+		ac_cv_func_EVP_sha384=yes ac_cv_func_EVP_sha512=yes
 	BIND_CONF_OPT += --with-openssl=$(STAGING_DIR)/usr LIBS="-lz" \
 		--with-ecdsa=yes
 # GOST cipher support requires openssl extra engines

@@ -128,6 +128,126 @@ config BR2_PACKAGE_PROCPS
 	help
 	  The procps package has been replaced by the equivalent procps-ng.
 
+config BR2_BINUTILS_VERSION_2_20_1
+	bool "binutils 2.20.1 has been removed"
+	select BR2_LEGACY
+	help
+	  The 2.20.1 version of binutils has been removed. Use a newer
+	  version instead.
+
+config BR2_BINUTILS_VERSION_2_21
+	bool "binutils 2.21 has been removed"
+	select BR2_LEGACY
+	help
+	  The 2.21 version of binutils has been removed. Use a newer
+	  version instead.
+
+config BR2_BINUTILS_VERSION_2_23_1
+	bool "binutils 2.23.1 has been removed"
+	select BR2_LEGACY
+	help
+	  The 2.23.1 version of binutils has been removed. Use a newer
+	  version instead.
+
+config BR2_UCLIBC_VERSION_0_9_32
+	bool "uclibc 0.9.32 has been removed"
+	select BR2_LEGACY
+	help
+	  The 0.9.32 version of uClibc has been removed. Use a newer
+	  version instead.
+
+config BR2_GCC_VERSION_4_3_X
+	bool "gcc 4.3.x has been removed"
+	select BR2_LEGACY
+	help
+	  The 4.3.x version of gcc has been removed. Use a newer
+	  version instead.
+
+config BR2_GCC_VERSION_4_6_X
+	bool "gcc 4.6.x has been removed"
+	select BR2_LEGACY
+	help
+	  The 4.6.x version of gcc has been removed. Use a newer
+	  version instead.
+
+config BR2_GDB_VERSION_7_4
+	bool "gdb 7.4 has been removed"
+	select BR2_LEGACY
+	help
+	  The 7.4 version of gdb has been removed. Use a newer version
+	  instead.
+
+config BR2_GDB_VERSION_7_5
+	bool "gdb 7.5 has been removed"
+	select BR2_LEGACY
+	help
+	  The 7.5 version of gdb has been removed. Use a newer version
+	  instead.
+
+config BR2_BUSYBOX_VERSION_1_19_X
+	bool "busybox version selection has been removed"
+	select BR2_LEGACY
+	help
+	  The possibility of selecting the Busybox version has been
+	  removed. Use the latest version provided by the Busybox
+	  package instead.
+
+config BR2_BUSYBOX_VERSION_1_20_X
+	bool "busybox version selection has been removed"
+	select BR2_LEGACY
+	help
+	  The possibility of selecting the Busybox version has been
+	  removed. Use the latest version provided by the Busybox
+	  package instead.
+
+config BR2_BUSYBOX_VERSION_1_21_X
+	bool "busybox version selection has been removed"
+	select BR2_LEGACY
+	help
+	  The possibility of selecting the Busybox version has been
+	  removed. Use the latest version provided by the Busybox
+	  package instead.
+
+config BR2_PACKAGE_LIBV4L_DECODE_TM6000
+	bool "decode_tm6000"
+	select BR2_PACKAGE_LIBV4L_UTILS
+	select BR2_LEGACY
+	help
+	  This libv4l option has been deprecated and replaced by a single
+	  option to build all the libv4l utilities.
+
+config BR2_PACKAGE_LIBV4L_IR_KEYTABLE
+	bool "ir-keytable"
+	select BR2_PACKAGE_LIBV4L_UTILS
+	select BR2_LEGACY
+	help
+	  This libv4l option has been deprecated and replaced by a single
+	  option to build all the libv4l utilities.
+
+config BR2_PACKAGE_LIBV4L_V4L2_COMPLIANCE
+	bool "v4l2-compliance"
+	select BR2_PACKAGE_LIBV4L_UTILS
+	select BR2_LEGACY
+	help
+	  This libv4l option has been deprecated and replaced by a single
+	  option to build all the libv4l utilities.
+
+config BR2_PACKAGE_LIBV4L_V4L2_CTL
+	bool "v4l2-ctl"
+	select BR2_PACKAGE_LIBV4L_UTILS
+	select BR2_LEGACY
+	help
+	  This libv4l option has been deprecated and replaced by a single
+	  option to build all the libv4l utilities.
+
+config BR2_PACKAGE_LIBV4L_V4L2_DBG
+	bool "v4l2-dbg"
+	select BR2_PACKAGE_LIBV4L_UTILS
+	select BR2_LEGACY
+	help
+	  This libv4l option has been deprecated and replaced by a single
+	  option to build all the libv4l utilities.
+
 ###############################################################################
 comment "Legacy options removed in 2014.05"
 
@@ -346,7 +466,7 @@ config BR2_KERNEL_HEADERS_3_5
 
 config BR2_GDB_VERSION_7_2
 	bool "gdb 7.2.x is no longer supported"
-	select BR2_GDB_VERSION_7_5
+	select BR2_GDB_VERSION_7_6
 	select BR2_LEGACY
 	help
 	  Version 7.2.x of gdb has been deprecated for more than four
@@ -355,7 +475,7 @@ config BR2_GDB_VERSION_7_2
 
 config BR2_GDB_VERSION_7_3
 	bool "gdb 7.3.x is no longer supported"
-	select BR2_GDB_VERSION_7_5
+	select BR2_GDB_VERSION_7_6
 	select BR2_LEGACY
 	help
 	  Version 7.3.x of gdb has been deprecated for more than four

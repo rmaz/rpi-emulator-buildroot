@@ -6,7 +6,9 @@
 
 BONNIE_VERSION = 1.03e
 BONNIE_SOURCE = bonnie++-$(BONNIE_VERSION).tgz
-BONNIE_SITE = http://www.coker.com.au/bonnie++/
+BONNIE_SITE = http://www.coker.com.au/bonnie++
+BONNIE_LICENSE = GPLv2
+BONNIE_LICENSE_FILES = copyright.txt
 
 define BONNIE_INSTALL_TARGET_CMDS
 	$(INSTALL) -D -m 755 $(@D)/bonnie++ $(TARGET_DIR)/usr/sbin/bonnie++

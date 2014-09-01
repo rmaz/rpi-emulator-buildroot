@@ -189,6 +189,13 @@ fi
 
 if grep -q ^BR2_NEEDS_HOST_JAVA=y $BR2_CONFIG ; then
 	check_prog_host "java"
+	JAVA_GCJ=$(java -version 2>&1 | grep gcj)
+	if [ ! -z "$JAVA_GCJ" ] ; then
+		echo
+		echo "$JAVA_GCJ is not sufficient to compile your package selection."
+		echo "Please install an OpenJDK/IcedTea/Oracle Java."
+		exit 1 ;
+	fi
 fi
 
 if grep -q ^BR2_NEEDS_HOST_JAVAC=y $BR2_CONFIG ; then
@@ -205,8 +212,9 @@ if grep -q ^BR2_HOSTARCH_NEEDS_IA32_LIBS=y $BR2_CONFIG ; then
 		echo "Your Buildroot configuration uses pre-built tools for the x86 architecture,"
 		echo "but your build machine uses the x86-64 architecture without the 32 bits compatibility"
 		echo "library."
-		echo "If you're running a Debian/Ubuntu distribution, install the libc6:i386,"
-		echo "libstdc++6:i386, and zlib1g:i386 packages."
+		echo "If you're running a Debian/Ubuntu distribution, install the libc6-386,"
+		echo "lib32stdc++6, and lib32z1 packages (or alternatively libc6:i386,"
+		echo "libstdc++6:i386, and zlib1g:i386)."
 		echo "For other distributions, refer to the documentation on how to install the 32 bits"
 		echo "compatibility libraries."
 		exit 1

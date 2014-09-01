@@ -9,55 +9,54 @@ DEJAVU_SITE = http://sourceforge.net/projects/dejavu/files/dejavu/$(DEJAVU_VERSI
 DEJAVU_SOURCE = dejavu-fonts-ttf-$(DEJAVU_VERSION).tar.bz2
 DEJAVU_LICENSE_FILES = LICENSE
 
-DEJAVU_TARGET_DIR = $(TARGET_DIR)/usr/share/fonts/dejavu
-DEJAVU_FONTCONFIG_TARGET_DIR = $(TARGET_DIR)/usr/share/fontconfig/conf.avail
+DEJAVU_FONTS_INSTALL =
+DEJAVU_FONTCONFIG_CONF_INSTALL =
 
 ifeq ($(BR2_PACKAGE_DEJAVU_MONO),y)
-define DEJAVU_INSTALL_MONO
-	$(INSTALL) -m 644 $(@D)/ttf/DejaVuSansMono*.ttf $(DEJAVU_TARGET_DIR)
-	$(INSTALL) -m 644 $(@D)/fontconfig/20-unhint-small-dejavu-sans-mono.conf $(DEJAVU_FONTCONFIG_TARGET_DIR)
-	$(INSTALL) -m 644 $(@D)/fontconfig/57-dejavu-sans-mono.conf $(DEJAVU_FONTCONFIG_TARGET_DIR)
-endef
+DEJAVU_FONTS_INSTALL += DejaVuSansMono*.ttf
+DEJAVU_FONTCONFIG_CONF_INSTALL += \
+	20-unhint-small-dejavu-sans-mono.conf \
+	57-dejavu-sans-mono.conf
 endif
 
 ifeq ($(BR2_PACKAGE_DEJAVU_SANS),y)
-define DEJAVU_INSTALL_SANS
-	$(INSTALL) -m 644 $(@D)/ttf/DejaVuSans.ttf $(DEJAVU_TARGET_DIR)
-	$(INSTALL) -m 644 $(@D)/ttf/DejaVuSans-*.ttf $(DEJAVU_TARGET_DIR)
-	$(INSTALL) -m 644 $(@D)/fontconfig/20-unhint-small-dejavu-sans.conf $(DEJAVU_FONTCONFIG_TARGET_DIR)
-	$(INSTALL) -m 644 $(@D)/fontconfig/57-dejavu-sans.conf $(DEJAVU_FONTCONFIG_TARGET_DIR)
-endef
+DEJAVU_FONTS_INSTALL += DejaVuSans.ttf DejaVuSans-*.ttf
+DEJAVU_FONTCONFIG_CONF_INSTALL += \
+	20-unhint-small-dejavu-sans.conf \
+	57-dejavu-sans.conf
 endif
 
 ifeq ($(BR2_PACKAGE_DEJAVU_SERIF),y)
-define DEJAVU_INSTALL_SERIF
-	$(INSTALL) -m 644 $(@D)/ttf/DejaVuSerif.ttf $(DEJAVU_TARGET_DIR)
-	$(INSTALL) -m 644 $(@D)/ttf/DejaVuSerif-*.ttf $(DEJAVU_TARGET_DIR)
-	$(INSTALL) -m 644 $(@D)/fontconfig/20-unhint-small-dejavu-serif.conf $(DEJAVU_FONTCONFIG_TARGET_DIR)
-	$(INSTALL) -m 644 $(@D)/fontconfig/57-dejavu-serif.conf $(DEJAVU_FONTCONFIG_TARGET_DIR)
-endef
+DEJAVU_FONTS_INSTALL += DejaVuSerif.ttf DejaVuSerif-*.ttf
+DEJAVU_FONTCONFIG_CONF_INSTALL += \
+	20-unhint-small-dejavu-serif.conf \
+	57-dejavu-serif.conf
 endif
 
 ifeq ($(BR2_PACKAGE_DEJAVU_SANS_CONDENSED),y)
-define DEJAVU_INSTALL_SANS_CONDENSED
-	$(INSTALL) -m 644 $(@D)/ttf/DejaVuSansCondensed*.ttf $(DEJAVU_TARGET_DIR)
-endef
+DEJAVU_FONTS_INSTALL += DejaVuSansCondensed*.ttf
 endif
 
 ifeq ($(BR2_PACKAGE_DEJAVU_SERIF_CONDENSED),y)
-define DEJAVU_INSTALL_SERIF_CONDENSED
-	$(INSTALL) -m 644 $(@D)/ttf/DejaVuSerifCondensed*.ttf $(DEJAVU_TARGET_DIR)
+DEJAVU_FONTS_INSTALL += DejaVuSerifCondensed*.ttf
+endif
+
+ifeq ($(BR2_PACKAGE_FONTCONFIG),y)
+define DEJAVU_FONTCONFIG_CONF_INSTALL_CMDS
+	for i in $(DEJAVU_FONTCONFIG_CONF_INSTALL) ; do \
+		$(INSTALL) -D -m 0644 $(@D)/fontconfig/$$i \
+			$(TARGET_DIR)/usr/share/fontconfig/conf.avail/$$i || exit 1 ; \
+	done
 endef
 endif
 
 define DEJAVU_INSTALL_TARGET_CMDS
-	mkdir -p $(DEJAVU_TARGET_DIR)
-	mkdir -p $(DEJAVU_FONTCONFIG_TARGET_DIR)
-	$(DEJAVU_INSTALL_MONO)
-	$(DEJAVU_INSTALL_SANS)
-	$(DEJAVU_INSTALL_SERIF)
-	$(DEJAVU_INSTALL_SANS_CONDENSED)
-	$(DEJAVU_INSTALL_SERIF_CONDENSED)
+	mkdir -p $(TARGET_DIR)/usr/share/fonts/dejavu/
+	for i in $(DEJAVU_FONTS_INSTALL) ; do \
+		$(INSTALL) -m 0644 $(@D)/ttf/$$i \
+			$(TARGET_DIR)/usr/share/fonts/dejavu/ || exit 1 ; \
+	done
+	$(DEJAVU_FONTCONFIG_CONF_INSTALL_CMDS)
 endef
 
 $(eval $(generic-package))

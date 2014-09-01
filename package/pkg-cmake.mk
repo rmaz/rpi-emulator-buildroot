@@ -9,7 +9,7 @@
 # infrastructure
 #
 # In terms of implementation, this CMake infrastructure requires
-# the .mk file to only specify metadata informations about the
+# the .mk file to only specify metadata information about the
 # package: name, version, download URL, etc.
 #
 # We still allow the package .mk file to override what the different
@@ -27,7 +27,7 @@
 # generate the necessary make targets
 #
 #  argument 1 is the lowercase package name
-#  argument 2 is the uppercase package name, including an HOST_ prefix
+#  argument 2 is the uppercase package name, including a HOST_ prefix
 #             for host packages
 #  argument 3 is the uppercase package name, without the HOST_ prefix
 #             for host packages

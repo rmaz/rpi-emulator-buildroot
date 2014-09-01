@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-DBUS_VERSION = 1.8.4
+DBUS_VERSION = 1.8.6
 DBUS_SITE = http://dbus.freedesktop.org/releases/dbus
 DBUS_LICENSE = AFLv2.1 GPLv2+
 DBUS_LICENSE_FILES = COPYING
@@ -35,7 +35,7 @@ define DBUS_USERS
 endef
 
 ifeq ($(BR2_PREFER_STATIC_LIB),y)
-DBUS_CONF_OPT += LIBS='-lpthread'
+DBUS_CONF_OPT += LIBS='-pthread'
 endif
 
 ifeq ($(BR2_microblaze),y)
@@ -50,8 +50,13 @@ else
 DBUS_CONF_OPT += --without-x
 endif
 
-ifeq ($(BR2_PACKAGE_SYSTEMD),y)
-DBUS_CONF_OPT += --with-systemdsystemunitdir=/lib/systemd/system
+ifeq ($(BR2_INIT_SYSTEMD),y)
+DBUS_CONF_OPT += \
+	--enable-systemd \
+	--with-systemdsystemunitdir=/lib/systemd/system
+DBUS_DEPENDENCIES += systemd
+else
+DBUS_CONF_OPT += --disable-systemd
 endif
 
 # fix rebuild (dbus makefile errors out if /var/lib/dbus is a symlink)

@@ -13,7 +13,7 @@
 # In terms of implementation, this generic infrastructure requires the
 # .mk file to specify:
 #
-#   1. Metadata informations about the package: name, version,
+#   1. Metadata information about the package: name, version,
 #      download URL, etc.
 #
 #   2. Description of the commands to be executed to configure, build
@@ -201,9 +201,13 @@ $(BUILD_DIR)/%/.stamp_staging_installed:
 	$(foreach hook,$($(PKG)_POST_INSTALL_STAGING_HOOKS),$(call $(hook))$(sep))
 	$(Q)if test -n "$($(PKG)_CONFIG_SCRIPTS)" ; then \
 		$(call MESSAGE,"Fixing package configuration files") ;\
-			$(SED)  "s,^\(exec_\)\?prefix=.*,\1prefix=$(STAGING_DIR)/usr,g" \
-				-e "s,-I/usr/,-I$(STAGING_DIR)/usr/,g" \
-				-e "s,-L/usr/,-L$(STAGING_DIR)/usr/,g" \
+			$(SED)  "s,$(BASE_DIR),@BASE_DIR@,g" \
+				-e "s,$(STAGING_DIR),@STAGING_DIR@,g" \
+				-e "s,^\(exec_\)\?prefix=.*,\1prefix=@STAGING_DIR@/usr,g" \
+				-e "s,-I/usr/,-I@STAGING_DIR@/usr/,g" \
+				-e "s,-L/usr/,-L@STAGING_DIR@/usr/,g" \
+				-e "s,@STAGING_DIR@,$(STAGING_DIR),g" \
+				-e "s,@BASE_DIR@,$(BASE_DIR),g" \
 				$(addprefix $(STAGING_DIR)/usr/bin/,$($(PKG)_CONFIG_SCRIPTS)) ;\
 	fi
 	$(Q)touch $@
@@ -224,11 +228,11 @@ $(BUILD_DIR)/%/.stamp_target_installed:
 	@$(call step_start,install-target)
 	@$(call MESSAGE,"Installing to target")
 	$(foreach hook,$($(PKG)_PRE_INSTALL_TARGET_HOOKS),$(call $(hook))$(sep))
+	+$($(PKG)_INSTALL_TARGET_CMDS)
 	$(if $(BR2_INIT_SYSTEMD),\
 		$($(PKG)_INSTALL_INIT_SYSTEMD))
 	$(if $(BR2_INIT_SYSV)$(BR2_INIT_BUSYBOX),\
 		$($(PKG)_INSTALL_INIT_SYSV))
-	+$($(PKG)_INSTALL_TARGET_CMDS)
 	$(foreach hook,$($(PKG)_POST_INSTALL_TARGET_HOOKS),$(call $(hook))$(sep))
 	$(Q)if test -n "$($(PKG)_CONFIG_SCRIPTS)" ; then \
 		$(RM) -f $(addprefix $(TARGET_DIR)/usr/bin/,$($(PKG)_CONFIG_SCRIPTS)) ; \
@@ -264,7 +268,7 @@ endef
 # generic package
 #
 #  argument 1 is the lowercase package name
-#  argument 2 is the uppercase package name, including an HOST_ prefix
+#  argument 2 is the uppercase package name, including a HOST_ prefix
 #             for host packages
 #  argument 3 is the uppercase package name, without the HOST_ prefix
 #             for host packages
@@ -300,7 +304,7 @@ define inner-generic-package
 # already defined. For some variables (version, source, site and
 # subdir), if they are undefined, we try to see if a variable without
 # the HOST_ prefix is defined. If so, we use such a variable, so that
-# these informations have only to be specified once, for both the
+# this information has only to be specified once, for both the
 # target and host packages of a given .mk file.
 
 $(2)_TYPE                       =  $(4)
@@ -314,14 +318,14 @@ $(2)_RAWNAME			=  $$(patsubst host-%,%,$(1))
 # version control system branch or tag, for example remotes/origin/1_10_stable.
 ifndef $(2)_VERSION
  ifdef $(3)_VERSION
-  $(2)_DL_VERSION = $$($(3)_VERSION)
+  $(2)_DL_VERSION := $$($(3)_VERSION)
   $(2)_VERSION := $$(subst /,_,$$($(3)_VERSION))
  else
   $(2)_VERSION = undefined
   $(2)_DL_VERSION = undefined
  endif
 else
-  $(2)_DL_VERSION = $$($(2)_VERSION)
+  $(2)_DL_VERSION := $$($(2)_VERSION)
   $(2)_VERSION := $$(subst /,_,$$($(2)_VERSION))
 endif
 
@@ -541,7 +545,10 @@ else
 #  source, by rsyncing
 #  depends
 #  configure
-$$($(2)_TARGET_CONFIGURE):	$$($(2)_TARGET_RSYNC)
+
+# Use an order-only dependency so the "<pkg>-clean-for-rebuild" rule
+# can remove the stamp file without triggering the configure step.
+$$($(2)_TARGET_CONFIGURE): | $$($(2)_TARGET_RSYNC)
 
 $(1)-depends:		$$($(2)_FINAL_DEPENDENCIES)
 
@@ -556,7 +563,7 @@ endif
 $(1)-show-depends:
 			@echo $$($(2)_FINAL_DEPENDENCIES)
 
-$(1)-graph-depends:
+$(1)-graph-depends: graph-depends-requirements
 			@$$(INSTALL) -d $$(O)/graphs
 			@cd "$$(CONFIG_DIR)"; \
 			$$(TOPDIR)/support/scripts/graph-depends -p $(1) $$(BR2_GRAPH_DEPS_OPTS) \
@@ -599,6 +606,7 @@ $$($(2)_TARGET_PATCH):			RAWNAME=$$(patsubst host-%,%,$(1))
 $$($(2)_TARGET_PATCH):			PKGDIR=$(pkgdir)
 $$($(2)_TARGET_EXTRACT):		PKG=$(2)
 $$($(2)_TARGET_SOURCE):			PKG=$(2)
+$$($(2)_TARGET_SOURCE):			PKGDIR=$(pkgdir)
 $$($(2)_TARGET_DIRCLEAN):		PKG=$(2)
 
 # Compute the name of the Kconfig option that correspond to the
@@ -620,16 +628,28 @@ $(2)_MANIFEST_LICENSE_FILES = $$($(2)_LICENSE_FILES)
 endif
 $(2)_MANIFEST_LICENSE_FILES ?= not saved
 
+# If the package declares _LICENSE_FILES, we need to extract it,
+# for overriden, local or normal remote packages alike, whether
+# we want to redistribute it or not.
+ifneq ($$($(2)_LICENSE_FILES),)
+$(1)-legal-info: $(1)-patch
+endif
+
+# We only save the sources of packages we want to redistribute, that are
+# non-local, and non-overriden. So only store, in the manifest, the tarball
+# name of those packages.
 ifeq ($$($(2)_REDISTRIBUTE),YES)
 ifneq ($$($(2)_SITE_METHOD),local)
 ifneq ($$($(2)_SITE_METHOD),override)
-# Packages that have a tarball need it downloaded and extracted beforehand
-$(1)-legal-info: $(1)-extract $$(REDIST_SOURCES_DIR_$$(call UPPERCASE,$(4)))
+# Packages that have a tarball need it downloaded beforehand
+$(1)-legal-info: $(1)-source $$(REDIST_SOURCES_DIR_$$(call UPPERCASE,$(4)))
 $(2)_MANIFEST_TARBALL = $$($(2)_SOURCE)
+$(2)_MANIFEST_SITE = $$(call qstrip,$$($(2)_SITE))
 endif
 endif
 endif
 $(2)_MANIFEST_TARBALL ?= not saved
+$(2)_MANIFEST_SITE ?= not saved
 
 # legal-info: produce legally relevant info.
 $(1)-legal-info:
@@ -637,23 +657,28 @@ $(1)-legal-info:
 	$$(foreach hook,$$($(2)_PRE_LEGAL_INFO_HOOKS),$$(call $$(hook))$$(sep))
 ifneq ($$(call qstrip,$$($(2)_SOURCE)),)
 
-ifeq ($$($(2)_SITE_METHOD),local)
-# Packages without a tarball: don't save and warn
-	@$$(call legal-warning-pkg-savednothing,$$($(2)_RAWNAME),local)
-
-else ifneq ($$($(2)_OVERRIDE_SRCDIR),)
-	@$$(call legal-warning-pkg-savednothing,$$($(2)_RAWNAME),override)
-
-else
-# Other packages
-
 # Save license files if defined
+# We save the license files for any kind of package: normal, local,
+# overridden, or non-redistributable alike.
+# The reason to save license files even for no-redistribute packages
+# is that the license still applies to the files distributed as part
+# of the rootfs, even if the sources are not themselves redistributed.
 ifeq ($$(call qstrip,$$($(2)_LICENSE_FILES)),)
 	@$$(call legal-license-nofiles,$$($(2)_RAWNAME),$$(call UPPERCASE,$(4)))
 	@$$(call legal-warning-pkg,$$($(2)_RAWNAME),cannot save license ($(2)_LICENSE_FILES not defined))
 else
 	@$$(foreach F,$$($(2)_LICENSE_FILES),$$(call legal-license-file,$$($(2)_RAWNAME),$$(F),$$($(2)_DIR)/$$(F),$$(call UPPERCASE,$(4)))$$(sep))
 endif # license files
+
+ifeq ($$($(2)_SITE_METHOD),local)
+# Packages without a tarball: don't save and warn
+	@$$(call legal-warning-nosource,$$($(2)_RAWNAME),local)
+
+else ifneq ($$($(2)_OVERRIDE_SRCDIR),)
+	@$$(call legal-warning-nosource,$$($(2)_RAWNAME),override)
+
+else
+# Other packages
 
 ifeq ($$($(2)_REDISTRIBUTE),YES)
 # Copy the source tarball (just hardlink if possible)
@@ -662,7 +687,7 @@ ifeq ($$($(2)_REDISTRIBUTE),YES)
 endif # redistribute
 
 endif # other packages
-	@$$(call legal-manifest,$$($(2)_RAWNAME),$$($(2)_VERSION),$$($(2)_LICENSE),$$($(2)_MANIFEST_LICENSE_FILES),$$($(2)_MANIFEST_TARBALL),$$(call UPPERCASE,$(4)))
+	@$$(call legal-manifest,$$($(2)_RAWNAME),$$($(2)_VERSION),$$($(2)_LICENSE),$$($(2)_MANIFEST_LICENSE_FILES),$$($(2)_MANIFEST_TARBALL),$$($(2)_MANIFEST_SITE),$$(call UPPERCASE,$(4)))
 endif # ifneq ($$(call qstrip,$$($(2)_SOURCE)),)
 	$$(foreach hook,$$($(2)_POST_LEGAL_INFO_HOOKS),$$(call $$(hook))$$(sep))
 

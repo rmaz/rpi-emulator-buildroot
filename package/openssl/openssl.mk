@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-OPENSSL_VERSION = 1.0.1h
+OPENSSL_VERSION = 1.0.1i
 OPENSSL_SITE = http://www.openssl.org/source
 OPENSSL_LICENSE = OpenSSL or SSLeay
 OPENSSL_LICENSE_FILES = LICENSE
@@ -114,6 +114,14 @@ define OPENSSL_INSTALL_TARGET_CMDS
 	rm -rf $(TARGET_DIR)/usr/lib/ssl
 	rm -f $(TARGET_DIR)/usr/bin/c_rehash
 endef
+
+# libdl has no business in a static build
+ifeq ($(BR2_PREFER_STATIC_LIB),y)
+define OPENSSL_FIXUP_STATIC_PKGCONFIG
+	$(SED) 's/-ldl//' $(STAGING_DIR)/usr/lib/pkgconfig/openssl.pc
+endef
+OPENSSL_POST_INSTALL_STAGING_HOOKS += OPENSSL_FIXUP_STATIC_PKGCONFIG
+endif
 
 ifneq ($(BR2_PREFER_STATIC_LIB),y)
 # libraries gets installed read only, so strip fails

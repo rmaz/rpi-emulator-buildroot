@@ -27,7 +27,7 @@ define FREEIMAGE_INSTALL_STAGING_CMDS
 		"$(STAGING_DIR)/usr/include/FreeImage.h"
 	$(INSTALL) -D -m 755 "$(@D)/libfreeimage-$(FREEIMAGE_VERSION).so" \
 		"$(STAGING_DIR)/usr/lib/libfreeimage.so.$(FREEIMAGE_LIB_VERSION)"
-	ln -s "libfreeimage.so.$(FREEIMAGE_LIB_VERSION)" \
+	ln -sf "libfreeimage.so.$(FREEIMAGE_LIB_VERSION)" \
 		"$(STAGING_DIR)/usr/lib/libfreeimage.so"
 endef
 
@@ -38,7 +38,7 @@ define FREEIMAGE_INSTALL_TARGET_CMDS
 		"$(TARGET_DIR)/usr/include/FreeImage.h"
 	$(INSTALL) -D -m 755 "$(@D)/libfreeimage-$(FREEIMAGE_VERSION).so" \
 		"$(TARGET_DIR)/usr/lib/libfreeimage.so.$(FREEIMAGE_LIB_VERSION)"
-	ln -s "libfreeimage.so.$(FREEIMAGE_LIB_VERSION)" \
+	ln -sf "libfreeimage.so.$(FREEIMAGE_LIB_VERSION)" \
 		"$(TARGET_DIR)/usr/lib/libfreeimage.so"
 endef
 

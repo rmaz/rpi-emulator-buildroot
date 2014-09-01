@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-LIBNSS_VERSION = 3.16.1
+LIBNSS_VERSION = 3.16.3
 LIBNSS_SOURCE = nss-$(LIBNSS_VERSION).tar.gz
 LIBNSS_SITE = https://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/NSS_$(subst .,_,$(LIBNSS_VERSION))_RTM/src
 LIBNSS_DISTDIR = dist
@@ -47,7 +47,8 @@ define LIBNSS_BUILD_CMDS
 			SOURCE_MD_DIR=$(@D)/$(LIBNSS_DISTDIR) \
 			DIST=$(@D)/$(LIBNSS_DISTDIR) \
 			CHECKLOC= \
-			$(LIBNSS_BUILD_VARS) OPTIMIZER="$(TARGET_CFLAGS)"
+			$(LIBNSS_BUILD_VARS) TARGET_OPTIMIZER="$(TARGET_CFLAGS)" \
+			NATIVE_FLAGS="$(HOST_CFLAGS)"
 endef
 
 define LIBNSS_INSTALL_STAGING_CMDS
