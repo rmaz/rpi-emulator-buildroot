@@ -3,9 +3,9 @@
 # ARMSNES
 #
 ################################################################################
-ARMSNES_VERSION = 0.1
+ARMSNES_VERSION = 0.2
 ARMSNES_SITE = https://github.com/rmaz/ARMSNES-libretro/archive
-ARMSNES_SOURCE = 0.1.tar.gz
+ARMSNES_SOURCE = 0.2.tar.gz
 ARMSNES_TARGET = libarmsnes.so
 
 define ARMSNES_BUILD_CMDS
