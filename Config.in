@@ -1,600 +1,1218 @@
-#
+menu "Target packages"
 
-mainmenu "Buildroot $BR2_VERSION Configuration"
+	source "package/busybox/Config.in"
 
-config BR2_HAVE_DOT_CONFIG
-	bool
-	default y
+menu "Audio and video applications"
+	source "package/alsa-utils/Config.in"
+	source "package/aumix/Config.in"
+	source "package/bellagio/Config.in"
+	source "package/espeak/Config.in"
+	source "package/faad2/Config.in"
+	source "package/ffmpeg/Config.in"
+	source "package/flac/Config.in"
+	source "package/flite/Config.in"
+	source "package/gstreamer/Config.in"
+	source "package/gstreamer1/Config.in"
+	source "package/jack2/Config.in"
+	source "package/lame/Config.in"
+	source "package/libvpx/Config.in"
+	source "package/madplay/Config.in"
+	source "package/mpd/Config.in"
+	source "package/mpg123/Config.in"
+	source "package/mplayer/Config.in"
+	source "package/musepack/Config.in"
+	source "package/ncmpc/Config.in"
+	source "package/on2-8170-libs/Config.in"
+	source "package/opus-tools/Config.in"
+	source "package/pulseaudio/Config.in"
+	source "package/sox/Config.in"
+	source "package/tidsp-binaries/Config.in"
+	source "package/tstools/Config.in"
+	source "package/twolame/Config.in"
+	source "package/upmpdcli/Config.in"
+	source "package/vlc/Config.in"
+	source "package/vorbis-tools/Config.in"
+	source "package/wavpack/Config.in"
+	source "package/xbmc/Config.in"
+	source "package/yavta/Config.in"
+endmenu
 
-config BR2_VERSION
-	string
-	option env="BR2_VERSION_FULL"
+menu "Compressors and decompressors"
+	source "package/bzip2/Config.in"
+if BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
+	source "package/gzip/Config.in"
+endif
+	source "package/infozip/Config.in"
+	source "package/lz4/Config.in"
+	source "package/lzip/Config.in"
+	source "package/lzop/Config.in"
+	source "package/xz/Config.in"
+endmenu
 
-config BR2_HOSTARCH
-	string
-	option env="HOSTARCH"
+menu "Debugging, profiling and benchmark"
+	source "package/bonnie/Config.in"
+	source "package/cache-calibrator/Config.in"
+	source "package/dhrystone/Config.in"
+	source "package/dmalloc/Config.in"
+	source "package/dropwatch/Config.in"
+	source "package/dstat/Config.in"
+	source "package/duma/Config.in"
+	source "package/fio/Config.in"
+	source "package/gdb/Config.in"
+	source "package/google-breakpad/Config.in"
+	source "package/iozone/Config.in"
+	source "package/kexec/Config.in"
+	source "package/kexec-lite/Config.in"
+	source "package/ktap/Config.in"
+	source "package/latencytop/Config.in"
+	source "package/lmbench/Config.in"
+if BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
+	source "package/lsof/Config.in"
+endif
+	source "package/ltp-testsuite/Config.in"
+	source "package/ltrace/Config.in"
+	source "package/lttng-babeltrace/Config.in"
+	source "package/lttng-modules/Config.in"
+	source "package/lttng-tools/Config.in"
+	source "package/memstat/Config.in"
+	source "package/netperf/Config.in"
+	source "package/oprofile/Config.in"
+	source "package/pax-utils/Config.in"
+	source "package/perf/Config.in"
+	source "package/pv/Config.in"
+	source "package/ramsmp/Config.in"
+	source "package/ramspeed/Config.in"
+	source "package/rt-tests/Config.in"
+	source "package/strace/Config.in"
+	source "package/stress/Config.in"
+	source "package/sysprof/Config.in"
+	source "package/tinymembench/Config.in"
+	source "package/trace-cmd/Config.in"
+	source "package/valgrind/Config.in"
+	source "package/whetstone/Config.in"
+endmenu
 
-config BR2_EXTERNAL
-	string
-	option env="BR2_EXTERNAL"
+menu "Development tools"
+	source "package/binutils/Config.in"
+	source "package/bison/Config.in"
+	source "package/bsdiff/Config.in"
+	source "package/bustle/Config.in"
+	source "package/cvs/Config.in"
+if BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
+	source "package/diffutils/Config.in"
+endif
+	source "package/distcc/Config.in"
+if BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
+	source "package/findutils/Config.in"
+endif
+	source "package/flex/Config.in"
+if BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
+	source "package/gawk/Config.in"
+endif
+	source "package/gettext/Config.in"
+	source "package/git/Config.in"
+	source "package/gperf/Config.in"
+if BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
+	source "package/grep/Config.in"
+endif
+	source "package/intltool/Config.in"
+	source "package/jq/Config.in"
+	source "package/libtool/Config.in"
+	source "package/m4/Config.in"
+	source "package/make/Config.in"
+if BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
+	source "package/patch/Config.in"
+endif
+	source "package/pkgconf/Config.in"
+if BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
+	source "package/sed/Config.in"
+endif
+	source "package/sstrip/Config.in"
+	source "package/subversion/Config.in"
+if BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
+	source "package/tar/Config.in"
+endif
+	source "package/tree/Config.in"
+	source "package/yasm/Config.in"
+endmenu
 
-# Hidden boolean selected by packages in need of Java in order to build
-# (example: xbmc)
-config BR2_NEEDS_HOST_JAVA
-	bool
+menu "Filesystem and flash utilities"
+	source "package/btrfs-progs/Config.in"
+	source "package/cifs-utils/Config.in"
+	source "package/cramfs/Config.in"
+	source "package/curlftpfs/Config.in"
+	source "package/dosfstools/Config.in"
+	source "package/e2fsprogs/Config.in"
+	source "package/e2tools/Config.in"
+	source "package/ecryptfs-utils/Config.in"
+	source "package/exfat/Config.in"
+	source "package/exfat-utils/Config.in"
+	source "package/f2fs-tools/Config.in"
+	source "package/flashbench/Config.in"
+	source "package/genext2fs/Config.in"
+	source "package/genromfs/Config.in"
+	source "package/kobs-ng/Config.in"
+	source "package/makedevs/Config.in"
+	source "package/mmc-utils/Config.in"
+	source "package/mtd/Config.in"
+	source "package/mtools/Config.in"
+	source "package/nfs-utils/Config.in"
+	source "package/ntfs-3g/Config.in"
+	source "package/simicsfs/Config.in"
+	source "package/squashfs/Config.in"
+	source "package/sshfs/Config.in"
+	source "package/sunxi-tools/Config.in"
+	source "package/unionfs/Config.in"
+	source "package/xfsprogs/Config.in"
+endmenu
 
-# Hidden boolean selected by packages in need of javac in order to build
-# (example: classpath)
-config BR2_NEEDS_HOST_JAVAC
-	bool
+menu "Games"
+	source "package/doom-wad/Config.in"
+	source "package/gnuchess/Config.in"
+	source "package/lbreakout2/Config.in"
+	source "package/ltris/Config.in"
+	source "package/opentyrian/Config.in"
+	source "package/opentyrian-data/Config.in"
+	source "package/prboom/Config.in"
+	source "package/rubix/Config.in"
+        source "package/emulation-station/Config.in"
+menu "Emulators"
+        source "package/gpsp/Config.in"
+        source "package/retroarch/Config.in"
+if BR2_PACKAGE_RETROARCH
+menu "Libretro Cores"
+       source "package/armsnes/Config.in"
+endmenu
+endif
+endmenu
+endmenu
 
-# Hidden boolean selected by packages in need of jar in order to build
-# (example: classpath)
-config BR2_NEEDS_HOST_JAR
-	bool
+menu "Graphic libraries and applications (graphic/text)"
 
-# Hidden boolean selected by pre-built packages for x86, when they
-# need to run on x86-64 machines (example: pre-built external
-# toolchains, binary tools like SAM-BA, etc.).
-config BR2_HOSTARCH_NEEDS_IA32_LIBS
-	bool
+comment "Graphic applications"
+	source "package/fswebcam/Config.in"
+	source "package/gnuplot/Config.in"
+	source "package/jhead/Config.in"
+	source "package/rrdtool/Config.in"
 
-# Hidden boolean selected by packages that need to build 32 bits
-# binaries with the host compiler, even on 64 bits build machines (e.g
-# bootloaders).
-config BR2_HOSTARCH_NEEDS_IA32_COMPILER
-	bool
+comment "Graphic libraries"
+	source "package/cegui06/Config.in"
+	source "package/directfb/Config.in"
+	source "package/directfb-examples/Config.in"
+	source "package/divine/Config.in"
+	source "package/fbdump/Config.in"
+	source "package/fbgrab/Config.in"
+if BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
+	source "package/fbset/Config.in"
+endif
+	source "package/fb-test-app/Config.in"
+	source "package/fbterm/Config.in"
+	source "package/fbv/Config.in"
+	source "package/freeimage/Config.in"
+	source "package/imagemagick/Config.in"
+	source "package/linux-fusion/Config.in"
+	source "package/lite/Config.in"
+	source "package/mesa3d/Config.in"
+	source "package/ocrad/Config.in"
+	source "package/psplash/Config.in"
+	source "package/sawman/Config.in"
+	source "package/sdl/Config.in"
+	source "package/sdl_gfx/Config.in"
+	source "package/sdl_image/Config.in"
+	source "package/sdl_mixer/Config.in"
+	source "package/sdl_net/Config.in"
+	source "package/sdl_sound/Config.in"
+	source "package/sdl_ttf/Config.in"
 
-source "arch/Config.in"
+comment "Other GUIs"
+	source "package/efl/Config.in"
+	source "package/qt/Config.in"
 
-menu "Build options"
+if BR2_PACKAGE_QT
+comment "QT libraries and helper libraries"
+	source "package/grantlee/Config.in"
+	source "package/qextserialport/Config.in"
+	source "package/qjson/Config.in"
+	source "package/qtuio/Config.in"
+	source "package/qwt/Config.in"
+endif
 
-menu "Commands"
+	source "package/qt5/Config.in"
+	source "package/weston/Config.in"
+	source "package/x11r7/Config.in"
 
-config BR2_WGET
-	string "Wget command"
-	default "wget --passive-ftp -nd -t 3"
+comment "X applications"
+	source "package/alsamixergui/Config.in"
+	source "package/apitrace/Config.in"
+	source "package/dillo/Config.in"
+	source "package/docker/Config.in"
+	source "package/feh/Config.in"
+	source "package/freerdp/Config.in"
+	source "package/gmpc/Config.in"
+	source "package/gob2/Config.in"
+	source "package/gqview/Config.in"
+	source "package/gtkperf/Config.in"
+	source "package/leafpad/Config.in"
+	source "package/midori/Config.in"
+	source "package/pcmanfm/Config.in"
+	source "package/rdesktop/Config.in"
+	source "package/synergy/Config.in"
+	source "package/torsmo/Config.in"
+	source "package/wmctrl/Config.in"
+	source "package/x11vnc/Config.in"
+	source "package/xscreensaver/Config.in"
+	source "package/xterm/Config.in"
+	source "package/xvkbd/Config.in"
 
-config BR2_SVN
-	string "Subversion (svn) command"
-	default "svn"
+comment "X libraries and helper libraries"
+	source "package/dejavu/Config.in"
+	source "package/liberation/Config.in"
+	source "package/libsexy/Config.in"
+	source "package/x11r7/xkeyboard-config/Config.in"
 
-config BR2_BZR
-	string "Bazaar (bzr) command"
-	default "bzr"
+comment "X window managers"
+	source "package/blackbox/Config.in"
+	source "package/enlightenment/Config.in"
+	source "package/fluxbox/Config.in"
+	source "package/matchbox/Config.in"
+	source "package/metacity/Config.in"
+endmenu
 
-config BR2_GIT
-	string "Git command"
-	default "git"
+menu "Hardware handling"
+menu "Firmware"
+	source "package/am33x-cm3/Config.in"
+	source "package/b43-firmware/Config.in"
+	source "package/linux-firmware/Config.in"
+	source "package/rpi-firmware/Config.in"
+	source "package/sunxi-boards/Config.in"
+	source "package/ux500-firmware/Config.in"
+	source "package/zd1211-firmware/Config.in"
+endmenu
+	source "package/a10disp/Config.in"
+	source "package/acpid/Config.in"
+	source "package/avrdude/Config.in"
+	source "package/cdrkit/Config.in"
+	source "package/cryptsetup/Config.in"
+	source "package/cwiid/Config.in"
+	source "package/dbus/Config.in"
+	source "package/dbus-cpp/Config.in"
+	source "package/dbus-glib/Config.in"
+	source "package/dbus-python/Config.in"
+	source "package/dbus-triggerd/Config.in"
+if BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
+	source "package/devmem2/Config.in"
+endif
+	source "package/dmidecode/Config.in"
+	source "package/dmraid/Config.in"
+	source "package/dvb-apps/Config.in"
+	source "package/dvbsnoop/Config.in"
+	source "package/dtv-scan-tables/Config.in"
+	source "package/eeprog/Config.in"
+	source "package/eudev/Config.in"
+	source "package/evemu/Config.in"
+	source "package/evtest/Config.in"
+	source "package/fan-ctrl/Config.in"
+	source "package/fconfig/Config.in"
+	source "package/fis/Config.in"
+	source "package/flashrom/Config.in"
+	source "package/fmtools/Config.in"
+	source "package/freescale-imx/Config.in"
+	source "package/fxload/Config.in"
+	source "package/gadgetfs-test/Config.in"
+	source "package/gpm/Config.in"
+	source "package/gpsd/Config.in"
+	source "package/gptfdisk/Config.in"
+	source "package/gvfs/Config.in"
+if BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
+	source "package/hdparm/Config.in"
+endif
+	source "package/hwdata/Config.in"
+	source "package/i2c-tools/Config.in"
+	source "package/input-event-daemon/Config.in"
+	source "package/input-tools/Config.in"
+	source "package/intel-microcode/Config.in"
+	source "package/iostat/Config.in"
+	source "package/irda-utils/Config.in"
+	source "package/iucode-tool/Config.in"
+	source "package/kbd/Config.in"
+	source "package/lcdproc/Config.in"
+	source "package/lm-sensors/Config.in"
+	source "package/lshw/Config.in"
+	source "package/lsuio/Config.in"
+	source "package/lvm2/Config.in"
+	source "package/mdadm/Config.in"
+	source "package/media-ctl/Config.in"
+	source "package/memtester/Config.in"
+	source "package/minicom/Config.in"
+	source "package/nanocom/Config.in"
+	source "package/neard/Config.in"
+	source "package/ofono/Config.in"
+	source "package/ola/Config.in"
+	source "package/on2-8170-modules/Config.in"
+	source "package/open2300/Config.in"
+	source "package/openocd/Config.in"
+	source "package/openpowerlink/Config.in"
+	source "package/owl-linux/Config.in"
+	source "package/parted/Config.in"
+	source "package/pciutils/Config.in"
+	source "package/picocom/Config.in"
+	source "package/pifmrds/Config.in"
+	source "package/read-edid/Config.in"
+	source "package/rng-tools/Config.in"
+	source "package/rpi-userland/Config.in"
+	source "package/sane-backends/Config.in"
+	source "package/sdparm/Config.in"
+	source "package/setserial/Config.in"
+	source "package/sg3_utils/Config.in"
+	source "package/sispmctl/Config.in"
+	source "package/smartmontools/Config.in"
+	source "package/smstools3/Config.in"
+	source "package/snowball-hdmiservice/Config.in"
+	source "package/sredird/Config.in"
+	source "package/statserial/Config.in"
+	source "package/sunxi-cedarx/Config.in"
+	source "package/sunxi-mali/Config.in"
+	source "package/sunxi-mali-prop/Config.in"
+	source "package/sysstat/Config.in"
+	source "package/ti-gfx/Config.in"
+	source "package/ti-uim/Config.in"
+	source "package/ti-utils/Config.in"
+	source "package/uboot-tools/Config.in"
+	source "package/udev/Config.in"
+	source "package/udisks/Config.in"
+	source "package/usb_modeswitch/Config.in"
+	source "package/usb_modeswitch_data/Config.in"
+	source "package/usbmount/Config.in"
+	source "package/usbutils/Config.in"
+	source "package/w_scan/Config.in"
+	source "package/wipe/Config.in"
+endmenu
 
-config BR2_CVS
-	string "CVS command"
-	default "cvs"
+menu "Interpreter languages and scripting"
+	source "package/enscript/Config.in"
+	source "package/erlang/Config.in"
+	source "package/haserl/Config.in"
+	source "package/jamvm/Config.in"
+	source "package/jimtcl/Config.in"
+	source "package/lua/Config.in"
+	source "package/luainterpreter/Config.in"
+	source "package/luajit/Config.in"
+if BR2_PACKAGE_HAS_LUAINTERPRETER && !BR2_PREFER_STATIC_LIB
+# lua modules are dynamically loaded, so not available on static builds
+menu "Lua libraries/modules"
+	source "package/cgilua/Config.in"
+	source "package/copas/Config.in"
+	source "package/cosmo/Config.in"
+	source "package/coxpcall/Config.in"
+	source "package/dado/Config.in"
+	source "package/lbase64/Config.in"
+	source "package/ljlinenoise/Config.in"
+	source "package/ljsyscall/Config.in"
+	source "package/lpeg/Config.in"
+	source "package/lpty/Config.in"
+	source "package/lrandom/Config.in"
+	source "package/lsqlite3/Config.in"
+	source "package/lua-cjson/Config.in"
+	source "package/lua-coat/Config.in"
+	source "package/lua-coatpersistent/Config.in"
+	source "package/lua-csnappy/Config.in"
+	source "package/lua-ev/Config.in"
+	source "package/lua-messagepack/Config.in"
+	source "package/lua-msgpack-native/Config.in"
+	source "package/lua-testmore/Config.in"
+	source "package/luasql-sqlite3/Config.in"
+	source "package/luabitop/Config.in"
+	source "package/luacrypto/Config.in"
+	source "package/luaexpat/Config.in"
+	source "package/luaexpatutils/Config.in"
+	source "package/luafilesystem/Config.in"
+	source "package/luajson/Config.in"
+	source "package/lualogging/Config.in"
+	source "package/luaposix/Config.in"
+	source "package/luasec/Config.in"
+	source "package/luasocket/Config.in"
+	source "package/lunit/Config.in"
+	source "package/lzlib/Config.in"
+	source "package/orbit/Config.in"
+	source "package/rings/Config.in"
+	source "package/wsapi/Config.in"
+	source "package/xavante/Config.in"
+endmenu
+endif
+	source "package/nodejs/Config.in"
+	source "package/perl/Config.in"
+if BR2_PACKAGE_PERL
+menu "Perl libraries/modules"
+	source "package/perl-datetime-tiny/Config.in"
+	source "package/perl-gd/Config.in"
+	source "package/perl-gdgraph/Config.in"
+	source "package/perl-gdtextutil/Config.in"
+	source "package/perl-io-socket-ssl/Config.in"
+	source "package/perl-json-tiny/Config.in"
+	source "package/perl-mojolicious/Config.in"
+	source "package/perl-net-ssleay/Config.in"
+	source "package/perl-path-tiny/Config.in"
+	source "package/perl-try-tiny/Config.in"
+	source "package/perl-xml-libxml/Config.in"
+	source "package/perl-xml-namespacesupport/Config.in"
+	source "package/perl-xml-sax-base/Config.in"
+	source "package/perl-xml-sax/Config.in"
+endmenu
+endif
+	source "package/php/Config.in"
+if BR2_PACKAGE_PHP
+if !BR2_PREFER_STATIC_LIB
+menu "External php extensions"
+	source "package/php-geoip/Config.in"
+	source "package/php-gnupg/Config.in"
+	source "package/php-imagick/Config.in"
+	source "package/php-memcached/Config.in"
+	source "package/php-ssh2/Config.in"
+	source "package/php-yaml/Config.in"
+	source "package/php-zmq/Config.in"
+endmenu
+endif
+if BR2_PREFER_STATIC_LIB
+comment "External PHP extensions need a toolchain w/ dynamic library"
+endif
+endif
+	source "package/python/Config.in"
+	source "package/python3/Config.in"
+if BR2_PACKAGE_PYTHON || BR2_PACKAGE_PYTHON3
+menu "external python modules"
+	source "package/python-bottle/Config.in"
+	source "package/python-cffi/Config.in"
+	source "package/python-configobj/Config.in"
+	source "package/python-crc16/Config.in"
+	source "package/python-daemon/Config.in"
+	source "package/python-dialog/Config.in"
+	source "package/python-dpkt/Config.in"
+	source "package/python-flup/Config.in"
+	source "package/python-id3/Config.in"
+	source "package/python-ipy/Config.in"
+	source "package/python-ipython/Config.in"
+	source "package/python-json-schema-validator/Config.in"
+	source "package/python-keyring/Config.in"
+	source "package/python-libconfig/Config.in"
+	source "package/python-mad/Config.in"
+	source "package/python-meld3/Config.in"
+	source "package/python-msgpack/Config.in"
+	source "package/python-netifaces/Config.in"
+	source "package/python-nfc/Config.in"
+	source "package/python-numpy/Config.in"
+	source "package/python-posix-ipc/Config.in"
+	source "package/python-protobuf/Config.in"
+	source "package/python-pyasn/Config.in"
+	source "package/python-pycrypto/Config.in"
+	source "package/python-pygame/Config.in"
+	source "package/python-pyparsing/Config.in"
+	source "package/python-pypcap/Config.in"
+	source "package/python-pyro/Config.in"
+	source "package/python-pysnmp/Config.in"
+	source "package/python-pysnmp-apps/Config.in"
+	source "package/python-pysnmp-mibs/Config.in"
+	source "package/python-pyusb/Config.in"
+	source "package/python-pyzmq/Config.in"
+	source "package/python-serial/Config.in"
+	source "package/python-setuptools/Config.in"
+	source "package/python-simplejson/Config.in"
+	source "package/python-thrift/Config.in"
+	source "package/python-tornado/Config.in"
+	source "package/python-versiontools/Config.in"
+endmenu
+endif
+	source "package/ruby/Config.in"
+	source "package/tcl/Config.in"
+if BR2_PACKAGE_TCL
+menu "tcl libraries/modules"
+	source "package/expect/Config.in"
+	source "package/tcllib/Config.in"
+endmenu
+endif
+endmenu
 
-config BR2_LOCALFILES
-	string "Local files retrieval command"
-	default "cp"
+menu "Libraries"
 
-config BR2_SCP
-	string "Secure copy (scp) command"
-	default "scp"
+menu "Audio/Sound"
+	source "package/alsa-lib/Config.in"
+	source "package/audiofile/Config.in"
+	source "package/celt051/Config.in"
+	source "package/fdk-aac/Config.in"
+	source "package/libao/Config.in"
+	source "package/libcdaudio/Config.in"
+	source "package/libcdio/Config.in"
+	source "package/libcue/Config.in"
+	source "package/libcuefile/Config.in"
+	source "package/libid3tag/Config.in"
+	source "package/liblo/Config.in"
+	source "package/libmad/Config.in"
+	source "package/libmodplug/Config.in"
+	source "package/libmpd/Config.in"
+	source "package/libmpdclient/Config.in"
+	source "package/libreplaygain/Config.in"
+	source "package/libsamplerate/Config.in"
+	source "package/libsndfile/Config.in"
+	source "package/libsoxr/Config.in"
+	source "package/libvorbis/Config.in"
+	source "package/opencore-amr/Config.in"
+	source "package/opus/Config.in"
+	source "package/portaudio/Config.in"
+	source "package/speex/Config.in"
+	source "package/taglib/Config.in"
+	source "package/tremor/Config.in"
+	source "package/vo-aacenc/Config.in"
+	source "package/webrtc-audio-processing/Config.in"
+endmenu
 
-config BR2_SSH
-	string "Secure shell (ssh) command"
-	default "ssh"
+menu "Compression and decompression"
+	source "package/libarchive/Config.in"
+	source "package/lzo/Config.in"
+	source "package/snappy/Config.in"
+	source "package/zlib/Config.in"
+endmenu
 
-config BR2_HG
-	string "Mercurial (hg) command"
-	default "hg"
+menu "Crypto"
+	source "package/beecrypt/Config.in"
+	source "package/ca-certificates/Config.in"
+	source "package/cryptodev/Config.in"
+	source "package/gnutls/Config.in"
+	source "package/libassuan/Config.in"
+	source "package/libgcrypt/Config.in"
+	source "package/libgpg-error/Config.in"
+	source "package/libgpgme/Config.in"
+	source "package/libksba/Config.in"
+	source "package/libmcrypt/Config.in"
+	source "package/libmhash/Config.in"
+	source "package/libnss/Config.in"
+	source "package/libsecret/Config.in"
+	source "package/libsha1/Config.in"
+	source "package/libssh2/Config.in"
+	source "package/nettle/Config.in"
+	source "package/openssl/Config.in"
+	source "package/polarssl/Config.in"
+endmenu
 
-config BR2_ZCAT
-	string "zcat command"
-	default "gzip -d -c"
-	help
-	  Command to be used to extract a gzip'ed file to stdout.
-	  zcat is identical to gunzip -c except that the former may
-	  not be available on your system.
-	  Default is "gzip -d -c"
-	  Other possible values include "gunzip -c" or "zcat".
+menu "Database"
+	source "package/berkeleydb/Config.in"
+	source "package/cppdb/Config.in"
+	source "package/gdbm/Config.in"
+	source "package/mysql/Config.in"
+	source "package/postgresql/Config.in"
+	source "package/redis/Config.in"
+	source "package/sqlcipher/Config.in"
+	source "package/sqlite/Config.in"
+endmenu
 
-config BR2_BZCAT
-	string "bzcat command"
-	default "bzcat"
-	help
-	  Command to be used to extract a bzip2'ed file to stdout.
-	  bzcat is identical to bunzip2 -c except that the former may
-	  not be available on your system.
-	  Default is "bzcat"
-	  Other possible values include "bunzip2 -c" or "bzip2 -d -c".
+menu "Filesystem"
+	source "package/gamin/Config.in"
+	source "package/libconfig/Config.in"
+	source "package/libconfuse/Config.in"
+	source "package/libfuse/Config.in"
+	source "package/liblockfile/Config.in"
+	source "package/libnfs/Config.in"
+	source "package/libsysfs/Config.in"
+	source "package/lockdev/Config.in"
+endmenu
 
-config BR2_XZCAT
-	string "xzcat command"
-	default "xzcat"
-	help
-	  Command to be used to extract a xz'ed file to stdout.
-	  Default is "xzcat"
+menu "Graphics"
+	source "package/atk/Config.in"
+	source "package/cairo/Config.in"
+	source "package/fltk/Config.in"
+	source "package/fontconfig/Config.in"
+	source "package/freetype/Config.in"
+	source "package/gd/Config.in"
+	source "package/gdk-pixbuf/Config.in"
+	source "package/giblib/Config.in"
+	source "package/gtk2-engines/Config.in"
+	source "package/gtk2-themes/Config.in"
+	source "package/harfbuzz/Config.in"
+	source "package/imlib2/Config.in"
+	source "package/jasper/Config.in"
+	source "package/jpeg/Config.in"
+	source "package/lcms2/Config.in"
+	source "package/lesstif/Config.in"
+	source "package/libart/Config.in"
+	source "package/libdmtx/Config.in"
+	source "package/libdrm/Config.in"
+	source "package/libexif/Config.in"
+	source "package/libgail/Config.in"
+	source "package/libgeotiff/Config.in"
+	source "package/libglade/Config.in"
+	source "package/libglew/Config.in"
+	source "package/libglu/Config.in"
+	source "package/libgtk2/Config.in"
+	source "package/libpng/Config.in"
+	source "package/libqrencode/Config.in"
+	source "package/libraw/Config.in"
+	source "package/librsvg/Config.in"
+	source "package/libsvg/Config.in"
+	source "package/libsvg-cairo/Config.in"
+	source "package/libsvgtiny/Config.in"
+	source "package/libungif/Config.in"
+	source "package/libva/Config.in"
+	source "package/libva-intel-driver/Config.in"
+	source "package/opencv/Config.in"
+	source "package/opengl/Config.in"
+	source "package/pango/Config.in"
+	source "package/pixman/Config.in"
+	source "package/poppler/Config.in"
+	source "package/powervr/Config.in"
+	source "package/tiff/Config.in"
+	source "package/wayland/Config.in"
+	source "package/webkit/Config.in"
+	source "package/webp/Config.in"
+	source "package/zxing/Config.in"
+endmenu
 
-config BR2_TAR_OPTIONS
-	string "Tar options"
-	default ""
-	help
-	  Options to pass to tar when extracting the sources.
-	  E.g. " -v --exclude='*.svn*'" to exclude all .svn internal files
-	  and to be verbose.
+menu "Hardware handling"
+	source "package/ccid/Config.in"
+	source "package/dtc/Config.in"
+	source "package/gnu-efi/Config.in"
+	source "package/lcdapi/Config.in"
+	source "package/libaio/Config.in"
+	source "package/libatasmart/Config.in"
+	source "package/libcec/Config.in"
+	source "package/libfreefare/Config.in"
+	source "package/libftdi/Config.in"
+	source "package/libhid/Config.in"
+	source "package/libinput/Config.in"
+	source "package/libiqrf/Config.in"
+	source "package/libllcp/Config.in"
+	source "package/libmbim/Config.in"
+	source "package/libnfc/Config.in"
+	source "package/libqmi/Config.in"
+	source "package/libraw1394/Config.in"
+	source "package/librtlsdr/Config.in"
+	source "package/libserial/Config.in"
+	source "package/libsoc/Config.in"
+	source "package/libusb/Config.in"
+	source "package/libusb-compat/Config.in"
+	source "package/libv4l/Config.in"
+	source "package/libxkbcommon/Config.in"
+	source "package/mtdev/Config.in"
+	source "package/ne10/Config.in"
+	source "package/neardal/Config.in"
+	source "package/pcsc-lite/Config.in"
+	source "package/tslib/Config.in"
+	source "package/urg/Config.in"
+endmenu
+
+menu "Javascript"
+	source "package/explorercanvas/Config.in"
+	source "package/flot/Config.in"
+	source "package/jquery/Config.in"
+	source "package/jquery-keyboard/Config.in"
+	source "package/jquery-mobile/Config.in"
+	source "package/jquery-sparkline/Config.in"
+	source "package/jquery-ui/Config.in"
+	source "package/jquery-ui-themes/Config.in"
+	source "package/jquery-validation/Config.in"
+	source "package/jsmin/Config.in"
+	source "package/json-javascript/Config.in"
+endmenu
+
+menu "JSON/XML"
+	source "package/cjson/Config.in"
+	source "package/expat/Config.in"
+	source "package/ezxml/Config.in"
+	source "package/jansson/Config.in"
+	source "package/json-c/Config.in"
+	source "package/json-glib/Config.in"
+	source "package/libjson/Config.in"
+	source "package/libroxml/Config.in"
+	source "package/libxml2/Config.in"
+	source "package/libxmlpp/Config.in"
+	source "package/libxmlrpc/Config.in"
+	source "package/libxslt/Config.in"
+	source "package/libyaml/Config.in"
+	source "package/mxml/Config.in"
+	source "package/rapidjson/Config.in"
+	source "package/tinyxml/Config.in"
+	source "package/xerces/Config.in"
+	source "package/yajl/Config.in"
+endmenu
+
+menu "Logging"
+	source "package/liblog4c-localtime/Config.in"
+	source "package/liblogging/Config.in"
+	source "package/log4cplus/Config.in"
+	source "package/log4cxx/Config.in"
+	source "package/zlog/Config.in"
+endmenu
+
+menu "Multimedia"
+	source "package/libass/Config.in"
+	source "package/libbluray/Config.in"
+	source "package/libdvbsi/Config.in"
+	source "package/libdvdnav/Config.in"
+	source "package/libdvdread/Config.in"
+	source "package/libebml/Config.in"
+	source "package/libfslcodec/Config.in"
+	source "package/libfslparser/Config.in"
+	source "package/libfslvpuwrap/Config.in"
+	source "package/libmatroska/Config.in"
+	source "package/libmms/Config.in"
+	source "package/libmpeg2/Config.in"
+	source "package/libogg/Config.in"
+	source "package/libplayer/Config.in"
+	source "package/libtheora/Config.in"
+	source "package/live555/Config.in"
+	source "package/mediastreamer/Config.in"
+endmenu
+
+menu "Networking"
+	source "package/agentpp/Config.in"
+	source "package/c-ares/Config.in"
+	source "package/cppzmq/Config.in"
+	source "package/czmq/Config.in"
+	source "package/filemq/Config.in"
+	source "package/flickcurl/Config.in"
+	source "package/fmlib/Config.in"
+	source "package/geoip/Config.in"
+	source "package/glib-networking/Config.in"
+	source "package/libcgi/Config.in"
+	source "package/libcgicc/Config.in"
+	source "package/libcurl/Config.in"
+	source "package/libdnet/Config.in"
+	source "package/libeXosip2/Config.in"
+	source "package/libfcgi/Config.in"
+	source "package/libgsasl/Config.in"
+	source "package/libidn/Config.in"
+	source "package/libiscsi/Config.in"
+	source "package/libmbus/Config.in"
+	source "package/libmemcached/Config.in"
+	source "package/libmicrohttpd/Config.in"
+	source "package/libmnl/Config.in"
+	source "package/libmodbus/Config.in"
+	source "package/libndp/Config.in"
+	source "package/libnetfilter_acct/Config.in"
+	source "package/libnetfilter_conntrack/Config.in"
+	source "package/libnetfilter_cthelper/Config.in"
+	source "package/libnetfilter_cttimeout/Config.in"
+	source "package/libnetfilter_log/Config.in"
+	source "package/libnetfilter_queue/Config.in"
+	source "package/libnfnetlink/Config.in"
+	source "package/libnftnl/Config.in"
+	source "package/libnl/Config.in"
+	source "package/liboauth/Config.in"
+	source "package/liboping/Config.in"
+	source "package/libosip2/Config.in"
+	source "package/libpcap/Config.in"
+	source "package/librsync/Config.in"
+	source "package/libsocketcan/Config.in"
+	source "package/libshairplay/Config.in"
+	source "package/libsoup/Config.in"
+	source "package/libstrophe/Config.in"
+	source "package/libtirpc/Config.in"
+	source "package/libtorrent/Config.in"
+	source "package/libupnp/Config.in"
+	source "package/libvncserver/Config.in"
+	source "package/libwebsockets/Config.in"
+	source "package/neon/Config.in"
+	source "package/nss-mdns/Config.in"
+	source "package/omniorb/Config.in"
+	source "package/openpgm/Config.in"
+	source "package/ortp/Config.in"
+	source "package/qdecoder/Config.in"
+	source "package/rtmpdump/Config.in"
+	source "package/slirp/Config.in"
+	source "package/snmppp/Config.in"
+	source "package/thrift/Config.in"
+	source "package/usbredir/Config.in"
+	source "package/wvstreams/Config.in"
+	source "package/zeromq/Config.in"
+	source "package/zmqpp/Config.in"
+	source "package/zyre/Config.in"
+endmenu
+
+menu "Other"
+	source "package/apr/Config.in"
+	source "package/apr-util/Config.in"
+	source "package/argp-standalone/Config.in"
+	source "package/armadillo/Config.in"
+	source "package/boost/Config.in"
+	source "package/clapack/Config.in"
+	source "package/classpath/Config.in"
+	source "package/cppcms/Config.in"
+	source "package/eigen/Config.in"
+	source "package/elfutils/Config.in"
+	source "package/fftw/Config.in"
+	source "package/flann/Config.in"
+	source "package/glibmm/Config.in"
+	source "package/gmp/Config.in"
+	source "package/gsl/Config.in"
+	source "package/gtest/Config.in"
+	source "package/libargtable2/Config.in"
+	source "package/libatomic_ops/Config.in"
+	source "package/libbsd/Config.in"
+	source "package/libcap/Config.in"
+	source "package/libcap-ng/Config.in"
+	source "package/libcgroup/Config.in"
+	source "package/libcofi/Config.in"
+	source "package/libdaemon/Config.in"
+	source "package/libee/Config.in"
+	source "package/libelf/Config.in"
+	source "package/libev/Config.in"
+	source "package/libevdev/Config.in"
+	source "package/libevent/Config.in"
+	source "package/libffi/Config.in"
+	source "package/libgc/Config.in"
+	source "package/libglib2/Config.in"
+	source "package/libical/Config.in"
+	source "package/libnspr/Config.in"
+	source "package/libpfm4/Config.in"
+	source "package/libplist/Config.in"
+	source "package/libpthread-stubs/Config.in"
+	source "package/libpthsem/Config.in"
+	source "package/libseccomp/Config.in"
+	source "package/libsigc/Config.in"
+	source "package/libsigsegv/Config.in"
+	source "package/libtasn1/Config.in"
+	source "package/libtpl/Config.in"
+	source "package/libubox/Config.in"
+	source "package/libuci/Config.in"
+	source "package/libunwind/Config.in"
+	source "package/liburcu/Config.in"
+	source "package/libuv/Config.in"
+	source "package/linux-pam/Config.in"
+	source "package/lttng-libust/Config.in"
+	source "package/mpc/Config.in"
+	source "package/mpdecimal/Config.in"
+	source "package/mpfr/Config.in"
+	source "package/msgpack/Config.in"
+	source "package/mtdev2tuio/Config.in"
+	source "package/orc/Config.in"
+	source "package/p11-kit/Config.in"
+	source "package/poco/Config.in"
+	source "package/protobuf/Config.in"
+	source "package/protobuf-c/Config.in"
+	source "package/qhull/Config.in"
+	source "package/schifra/Config.in"
+	source "package/startup-notification/Config.in"
+	source "package/tz/Config.in"
+	source "package/tzdata/Config.in"
+endmenu
+
+menu "Security"
+	source "package/libsepol/Config.in"
+endmenu
+
+menu "Text and terminal handling"
+	source "package/enchant/Config.in"
+	source "package/icu/Config.in"
+	source "package/libedit/Config.in"
+	source "package/libenca/Config.in"
+	source "package/libestr/Config.in"
+	source "package/libfribidi/Config.in"
+	source "package/libiconv/Config.in"
+	source "package/linenoise/Config.in"
+	source "package/ncurses/Config.in"
+	source "package/newt/Config.in"
+	source "package/pcre/Config.in"
+	source "package/popt/Config.in"
+	source "package/readline/Config.in"
+	source "package/slang/Config.in"
+	source "package/tclap/Config.in"
+endmenu
 
 endmenu
 
-config BR2_DEFCONFIG_FROM_ENV
-	string
-	option env="BR2_DEFCONFIG"
+menu "Miscellaneous"
+	source "package/aespipe/Config.in"
+	source "package/bc/Config.in"
+	source "package/collectd/Config.in"
+	source "package/empty/Config.in"
+	source "package/googlefontdirectory/Config.in"
+	source "package/haveged/Config.in"
+	source "package/mcrypt/Config.in"
+	source "package/mobile-broadband-provider-info/Config.in"
+	source "package/shared-mime-info/Config.in"
+	source "package/snowball-init/Config.in"
+	source "package/sound-theme-borealis/Config.in"
+	source "package/sound-theme-freedesktop/Config.in"
+endmenu
 
-config BR2_DEFCONFIG
-	string "Location to save buildroot config"
-	default BR2_DEFCONFIG_FROM_ENV if BR2_DEFCONFIG_FROM_ENV != ""
-	default "$(CONFIG_DIR)/defconfig"
-	help
-	  When running 'make savedefconfig', the defconfig file will be saved
-	  in this location.
+menu "Mail"
+	source "package/exim/Config.in"
+	source "package/fetchmail/Config.in"
+	source "package/heirloom-mailx/Config.in"
+	source "package/libesmtp/Config.in"
+	source "package/msmtp/Config.in"
+	source "package/mutt/Config.in"
+	source "package/sylpheed/Config.in"
+endmenu
 
-config BR2_DL_DIR
-	string "Download dir"
-	default "$(TOPDIR)/dl"
-	help
-	  Directory to store all the source files that we need to fetch.
-	  If the Linux shell environment has defined the BR2_DL_DIR
-	  environment variable, then this overrides this configuration item.
-
-	  The default is $(TOPDIR)/dl
-
-config BR2_HOST_DIR
-	string "Host dir"
-	default "$(BASE_DIR)/host"
-	help
-	  Directory to store all the binary files that are built for the host.
-	  This includes the cross compilation toolchain when building the
-	  internal buildroot toolchain.
-
-	  The default is $(BASE_DIR)/host
-
-menu "Mirrors and Download locations"
-
-config BR2_PRIMARY_SITE
-	string "Primary download site"
-	default ""
-	help
-	  Primary site to download from. If this option is set then buildroot
-	  will try to download package source first from this site and try the
-	  default if the file is not found.
-	  Valid URIs are URIs recognized by $(WGET) and scp URIs of the form
-	  scp://[user@]host:path.
-	  NOTE: This works for all packages using the central package
-	  infrastructure (generic, autotools, cmake, ...)
-
-config BR2_PRIMARY_SITE_ONLY
-	bool "Only allow downloads from primary download site"
-	depends on BR2_PRIMARY_SITE != ""
-	help
-	  If this option is enabled, downloads will only be attempted
-	  from the primary download site. Other locations, like the
-	  package's official download location or the backup download
-	  site, will not be considered. Therefore, if the package is
-	  not present on the primary site, the download fails.
-
-	  This is useful for project developers who want to ensure
-	  that the project can be built even if the upstream tarball
-	  locations disappear.
-
-if !BR2_PRIMARY_SITE_ONLY
-
-config BR2_BACKUP_SITE
-	string "Backup download site"
-	default "http://sources.buildroot.net"
-	help
-	  Backup site to download from. If this option is set then buildroot
-	  will fall back to download package sources from here if the
-	  normal location fails.
-
-config BR2_KERNEL_MIRROR
-	string "Kernel.org mirror"
-	default "https://www.kernel.org/pub"
-	help
-	  kernel.org is mirrored on a number of servers around the world.
-	  The following allows you to select your preferred mirror.
-
-	  Have a look on the kernel.org site for a list of mirrors, then enter
-	  the URL to the base directory.  Examples:
-
-	     http://www.XX.kernel.org/pub (XX = country code)
-	     http://mirror.aarnet.edu.au/pub/ftp.kernel.org
-
-config BR2_GNU_MIRROR
-	string "GNU Software mirror"
-	default "http://ftp.gnu.org/pub/gnu"
-	help
-	  GNU has multiple software mirrors scattered around the world.
-	  The following allows you to select your preferred mirror.
-
-	  Have a look on the gnu.org site for a list of mirrors, then enter
-	  the URL to the base directory.  Examples:
-
-	     http://ftp.gnu.org/pub/gnu
-	     http://mirror.aarnet.edu.au/pub/gnu
-
-config BR2_DEBIAN_MIRROR
-	string "Debian Software mirror"
-	default "http://ftp.debian.org"
-	help
-	  Debian has multiple software mirrors scattered around the world.
-	  The following allows you to select your preferred mirror.
-
-	  Usually, just add your country code like XX here:
-	  http://ftp.XX.debian.org
-
+menu "Networking applications"
+	source "package/aiccu/Config.in"
+	source "package/aircrack-ng/Config.in"
+	source "package/argus/Config.in"
+	source "package/arptables/Config.in"
+	source "package/atftp/Config.in"
+	source "package/autossh/Config.in"
+	source "package/avahi/Config.in"
+	source "package/axel/Config.in"
+	source "package/bandwidthd/Config.in"
+	source "package/bcusdk/Config.in"
+	source "package/bind/Config.in"
+	source "package/bluez_utils/Config.in"
+	source "package/bluez5_utils/Config.in"
+	source "package/bmon/Config.in"
+	source "package/boa/Config.in"
+	source "package/bridge-utils/Config.in"
+	source "package/bwm-ng/Config.in"
+	source "package/can-utils/Config.in"
+	source "package/chrony/Config.in"
+	source "package/civetweb/Config.in"
+	source "package/connman/Config.in"
+	source "package/conntrack-tools/Config.in"
+	source "package/crda/Config.in"
+	source "package/ctorrent/Config.in"
+	source "package/cups/Config.in"
+if BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
+	source "package/dhcp/Config.in"
 endif
-
-config BR2_LUAROCKS_MIRROR
-	string "LuaRocks mirror"
-	default "http://rocks.moonscript.org"
-	help
-	  LuaRocks repository.
-
-	  See http://luarocks.org
-
-config BR2_CPAN_MIRROR
-	string "CPAN mirror (Perl packages)"
-	default "http://cpan.metacpan.org"
-	help
-	  CPAN (Comprehensive Perl Archive Network) is a repository
-	  of Perl packages. It has multiple software mirrors scattered
-	  around the world. This option allows you to select a mirror.
-
-	  The list of mirrors is available at:
-	  http://search.cpan.org/mirror
+	source "package/dhcpcd/Config.in"
+	source "package/dhcpdump/Config.in"
+	source "package/dnsmasq/Config.in"
+	source "package/dropbear/Config.in"
+	source "package/ebtables/Config.in"
+	source "package/ethtool/Config.in"
+	source "package/faifa/Config.in"
+	source "package/fmc/Config.in"
+	source "package/foomatic-filters/Config.in"
+	source "package/fping/Config.in"
+	source "package/gesftpserver/Config.in"
+	source "package/gutenprint/Config.in"
+	source "package/hiawatha/Config.in"
+	source "package/hostapd/Config.in"
+	source "package/hplip/Config.in"
+	source "package/httping/Config.in"
+if BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
+	source "package/ifplugd/Config.in"
+endif
+	source "package/iftop/Config.in"
+	source "package/igh-ethercat/Config.in"
+	source "package/igmpproxy/Config.in"
+	source "package/inadyn/Config.in"
+	source "package/iperf/Config.in"
+	source "package/iproute2/Config.in"
+	source "package/ipsec-tools/Config.in"
+	source "package/ipset/Config.in"
+	source "package/iptables/Config.in"
+	source "package/iptraf-ng/Config.in"
+	source "package/iputils/Config.in"
+	source "package/iw/Config.in"
+	source "package/kismet/Config.in"
+	source "package/knock/Config.in"
+	source "package/lftp/Config.in"
+	source "package/lighttpd/Config.in"
+	source "package/linknx/Config.in"
+	source "package/links/Config.in"
+	source "package/linphone/Config.in"
+	source "package/linux-zigbee/Config.in"
+	source "package/lrzsz/Config.in"
+	source "package/macchanger/Config.in"
+	source "package/memcached/Config.in"
+	source "package/mii-diag/Config.in"
+	source "package/minidlna/Config.in"
+	source "package/modem-manager/Config.in"
+	source "package/mongoose/Config.in"
+	source "package/mongrel2/Config.in"
+	source "package/mrouted/Config.in"
+	source "package/mtr/Config.in"
+	source "package/nbd/Config.in"
+	source "package/ncftp/Config.in"
+	source "package/ndisc6/Config.in"
+	source "package/netatalk/Config.in"
+if BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
+	source "package/netcat/Config.in"
+endif
+	source "package/netplug/Config.in"
+	source "package/netsnmp/Config.in"
+	source "package/netstat-nat/Config.in"
+if BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
+	source "package/net-tools/Config.in"
+endif
+	source "package/network-manager/Config.in"
+	source "package/nfacct/Config.in"
+	source "package/nftables/Config.in"
+	source "package/ngircd/Config.in"
+	source "package/ngrep/Config.in"
+	source "package/nmap/Config.in"
+	source "package/noip/Config.in"
+	source "package/ntp/Config.in"
+	source "package/nuttcp/Config.in"
+	source "package/olsr/Config.in"
+	source "package/openntpd/Config.in"
+	source "package/openobex/Config.in"
+	source "package/openssh/Config.in"
+	source "package/openswan/Config.in"
+	source "package/openvpn/Config.in"
+	source "package/p910nd/Config.in"
+	source "package/portmap/Config.in"
+	source "package/pppd/Config.in"
+	source "package/pptp-linux/Config.in"
+	source "package/proftpd/Config.in"
+	source "package/proxychains-ng/Config.in"
+	source "package/ptpd/Config.in"
+	source "package/ptpd2/Config.in"
+	source "package/quagga/Config.in"
+	source "package/radvd/Config.in"
+	source "package/rp-pppoe/Config.in"
+	source "package/rpcbind/Config.in"
+	source "package/rsh-redone/Config.in"
+	source "package/rsync/Config.in"
+	source "package/rtorrent/Config.in"
+	source "package/rtptools/Config.in"
+	source "package/samba/Config.in"
+	source "package/samba4/Config.in"
+	source "package/sconeserver/Config.in"
+	source "package/ser2net/Config.in"
+	source "package/smcroute/Config.in"
+	source "package/socat/Config.in"
+	source "package/socketcand/Config.in"
+	source "package/spawn-fcgi/Config.in"
+	source "package/spice/Config.in"
+	source "package/spice-protocol/Config.in"
+	source "package/squid/Config.in"
+	source "package/sshpass/Config.in"
+	source "package/strongswan/Config.in"
+	source "package/stunnel/Config.in"
+	source "package/tcpdump/Config.in"
+	source "package/tcping/Config.in"
+	source "package/tcpreplay/Config.in"
+if BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
+	source "package/tftpd/Config.in"
+endif
+	source "package/thttpd/Config.in"
+	source "package/tinyhttpd/Config.in"
+	source "package/tn5250/Config.in"
+	source "package/transmission/Config.in"
+	source "package/tvheadend/Config.in"
+	source "package/udpcast/Config.in"
+	source "package/ulogd/Config.in"
+	source "package/ushare/Config.in"
+	source "package/ussp-push/Config.in"
+	source "package/vde2/Config.in"
+	source "package/vpnc/Config.in"
+	source "package/vsftpd/Config.in"
+	source "package/vtun/Config.in"
+if BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
+	source "package/wget/Config.in"
+	source "package/whois/Config.in"
+endif
+	source "package/wireless-regdb/Config.in"
+	source "package/wireless_tools/Config.in"
+	source "package/wireshark/Config.in"
+	source "package/wpa_supplicant/Config.in"
+	source "package/wvdial/Config.in"
+	source "package/xinetd/Config.in"
+	source "package/xl2tp/Config.in"
+	source "package/znc/Config.in"
 
 endmenu
 
-config BR2_JLEVEL
-	int "Number of jobs to run simultaneously (0 for auto)"
-	default "0"
-	help
-	  Number of jobs to run simultaneously.  If 0, determine
-	  automatically according to number of CPUs on the host
-	  system.
-
-config BR2_CCACHE
-	bool "Enable compiler cache"
-	help
-	  This option will enable the use of ccache, a compiler
-	  cache. It will cache the result of previous builds to speed
-	  up future builds. By default, the cache is stored in
-	  $HOME/.buildroot-ccache.
-
-	  Note that Buildroot does not try to invalidate the cache
-	  contents when the compiler changes in an incompatible
-	  way. Therefore, if you make a change to the compiler version
-	  and/or configuration, you are responsible for purging the
-	  ccache cache by removing the $HOME/.buildroot-ccache
-	  directory.
-
-if BR2_CCACHE
-
-config BR2_CCACHE_DIR
-	string "Compiler cache location"
-	default "$(HOME)/.buildroot-ccache"
-	help
-	  Where ccache should store cached files.
-
-config BR2_CCACHE_INITIAL_SETUP
-	string "Compiler cache initial setup"
-	help
-	  Initial ccache settings to apply, such as --max-files or --max-size.
-
-	  For example, if your project is known to require more space than the
-	  default max cache size, then you might want to increase the cache size
-	  to a suitable amount using the -M (--max-size) option.
-
-	  The string you specify here is passed verbatim to ccache.  Refer to
-	  ccache documentation for more details.
-
-	  These initial settings are applied after ccache has been compiled.
-
+menu "Package managers"
+	source "package/ipkg/Config.in"
+	source "package/opkg/Config.in"
+if BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
+	source "package/rpm/Config.in"
 endif
-
-config BR2_DEPRECATED
-	bool "Show packages that are deprecated or obsolete"
-	help
-	  This option hides outdated/obsolete versions of packages.
-
-if BR2_DEPRECATED
-
-config BR2_DEPRECATED_SINCE_2013_11
-	bool
-	default y
-
-config BR2_DEPRECATED_SINCE_2014_02
-	bool
-	default y
-
-config BR2_DEPRECATED_SINCE_2014_05
-	bool
-	default y
-
-config BR2_DEPRECATED_SINCE_2014_08
-	bool
-	default y
-
-endif
-
-config BR2_ENABLE_DEBUG
-	bool "build packages with debugging symbols"
-	help
-	  Build packages with debugging symbols enabled. All libraries
-	  and binaries in the 'staging' directory will have debugging
-	  symbols, which allows remote debugging even if libraries and
-	  binaries are stripped on the target. Whether libraries and
-	  binaries are stripped on the target is controlled by the
-	  BR2_STRIP_* options below.
-
-if BR2_ENABLE_DEBUG
-choice
-	prompt "gcc debug level"
-	default BR2_DEBUG_2
-	help
-	  Set the debug level for gcc
-
-config BR2_DEBUG_1
-	bool "debug level 1"
-	help
-	  Debug level 1 produces minimal information, enough
-	  for making backtraces in parts of the program that
-	  you don't plan to debug. This includes descriptions
-	  of functions and external variables, but no information
-	  about local variables and no line numbers.
-
-config BR2_DEBUG_2
-	bool "debug level 2"
-	help
-	  The default gcc debug level is 2
-
-config BR2_DEBUG_3
-	bool "debug level 3"
-	help
-	  Level 3 includes extra information, such as all the
-	  macro definitions present in the program. Some debuggers
-	  support macro expansion when you use -g3.
-endchoice
-endif
-
-choice
-	prompt "strip command for binaries on target"
-	default BR2_STRIP_strip
-
-config BR2_STRIP_strip
-	bool "strip"
-	depends on !BR2_PACKAGE_HOST_ELF2FLT
-	help
-	  Binaries and libraries in the target filesystem will be
-	  stripped using the normal 'strip' command. This allows to
-	  save space, mainly by removing debugging symbols. Debugging
-	  symbols on the target are needed for native debugging, but
-	  not when remote debugging is used.
-
-config BR2_STRIP_sstrip
-	bool "sstrip"
-	select BR2_PACKAGE_SSTRIP_HOST
-	depends on !BR2_PACKAGE_HOST_ELF2FLT
-	depends on BR2_DEPRECATED_SINCE_2014_05
-	help
-	  Binaries and libraries in the target filesystem will be
-	  stripped using the 'sstrip' command, which strips a little
-	  bit more than the traditional 'strip' command. This allows to
-	  save space, mainly by removing debugging symbols. Debugging
-	  symbols on the target are needed for native debugging, but
-	  not when remote debugging is used.
-
-config BR2_STRIP_none
-	bool "none"
-	help
-	  Do not strip binaries and libraries in the target
-	  filesystem.
-endchoice
-
-config BR2_STRIP_EXCLUDE_FILES
-	string "executables that should not be stripped"
-	depends on !BR2_STRIP_none
-	default ""
-	help
-	  You may specify a space-separated list of binaries and libraries
-	  here that should not be stripped on the target.
-
-config BR2_STRIP_EXCLUDE_DIRS
-	string "directories that should be skipped when stripping"
-	depends on !BR2_STRIP_none
-	default ""
-	help
-	  You may specify a space-separated list of directories that should
-	  be skipped when stripping. Binaries and libraries in these
-	  directories will not be touched.
-	  The directories should be specified relative to the target directory,
-	  without leading slash.
-
-choice
-	prompt "gcc optimization level"
-	default BR2_OPTIMIZE_S
-	help
-	  Set the optimization level for gcc
-
-config BR2_OPTIMIZE_0
-	bool "optimization level 0"
-	help
-	  Do not optimize. This is the default.
-
-config BR2_OPTIMIZE_1
-	bool "optimization level 1"
-	help
-	  Optimize. Optimizing compilation takes somewhat more time,
-	  and a lot more memory for a large function. With -O, the
-	  compiler tries to reduce code size and execution time,
-	  without performing any optimizations that take a great deal
-	  of compilation time. -O turns on the following optimization
-	  flags: -fdefer-pop -fdelayed-branch -fguess-branch-probability
-	  -fcprop-registers -floop-optimize -fif-conversion
-	  -fif-conversion2 -ftree-ccp -ftree-dce -ftree-dominator-opts
-	  -ftree-dse -ftree-ter -ftree-lrs -ftree-sra -ftree-copyrename
-	  -ftree-fre -ftree-ch -funit-at-a-time -fmerge-constants
-	  -O also turns on -fomit-frame-pointer on machines where doing
-	  so does not interfere with debugging.
-
-config BR2_OPTIMIZE_2
-	bool "optimization level 2"
-	help
-	  Optimize even more. GCC performs nearly all supported optimizations
-	  that do not involve a space-speed tradeoff. The compiler does not
-	  perform loop unrolling or function inlining when you specify -O2.
-	  As compared to -O, this option increases both compilation time and
-	  the performance of the generated code. -O2 turns on all optimization
-	  flags specified by -O. It also turns on the following optimization
-	  flags: -fthread-jumps -fcrossjumping -foptimize-sibling-calls
-	  -fcse-follow-jumps -fcse-skip-blocks -fgcse  -fgcse-lm
-	  -fexpensive-optimizations -fstrength-reduce -frerun-cse-after-loop
-	  -frerun-loop-opt -fcaller-saves -fpeephole2 -fschedule-insns
-	  -fschedule-insns2 -fsched-interblock -fsched-spec -fregmove
-	  -fstrict-aliasing -fdelete-null-pointer-checks -freorder-blocks
-	  -freorder-functions -falign-functions -falign-jumps -falign-loops
-	  -falign-labels -ftree-vrp -ftree-pre
-	  Please note the warning under -fgcse about invoking -O2 on programs
-	  that use computed gotos.
-
-config BR2_OPTIMIZE_3
-	bool "optimization level 3"
-	help
-	  Optimize yet more. -O3 turns on all optimizations specified by -O2
-	  and also turns on the -finline-functions, -funswitch-loops and
-	  -fgcse-after-reload options.
-
-config BR2_OPTIMIZE_S
-	bool "optimize for size"
-	help
-	  Optimize for size. -Os enables all -O2 optimizations that do not
-	  typically increase code size. It also performs further optimizations
-	  designed to reduce code size. -Os disables the following optimization
-	  flags: -falign-functions -falign-jumps -falign-loops -falign-labels
-	  -freorder-blocks -freorder-blocks-and-partition -fprefetch-loop-arrays
-	  -ftree-vect-loop-version
-
-endchoice
-
-config BR2_GOOGLE_BREAKPAD_ENABLE
-	bool "Enable google-breakpad support"
-	select BR2_PACKAGE_GOOGLE_BREAKPAD
-	depends on BR2_INSTALL_LIBSTDCPP
-	depends on BR2_TOOLCHAIN_USES_GLIBC
-	depends on BR2_PACKAGE_GOOGLE_BREAKPAD_ARCH_SUPPORTS
-	help
-	  This option will enable the use of google breakpad, a
-	  library and tool suite that allows you to distribute an
-	  application to users with compiler-provided debugging
-	  information removed, record crashes in compact "minidump"
-	  files, send them back to your server and produce C and C++
-	  stack traces from these minidumps.  Breakpad can also write
-	  minidumps on request for programs that have not crashed.
-
-if BR2_GOOGLE_BREAKPAD_ENABLE
-
-config BR2_GOOGLE_BREAKPAD_INCLUDE_FILES
-	string "List of executables and libraries to extract symbols from"
-	default ""
-	help
-	  You may specify a space-separated list of binaries and
-	  libraries with full paths relative to $(TARGET_DIR) of which
-	  debug symbols will be dumped for further use with google
-	  breakpad.
-
-	  A directory structure that can be used by minidump-stackwalk
-	  will be created at:
-
-	  $(STAGING_DIR)/usr/share/google-breakpad-symbols
-
-endif
-
-config BR2_ENABLE_SSP
-	bool "build code with Stack Smashing Protection"
-	depends on BR2_TOOLCHAIN_HAS_SSP
-	help
-	  Enable stack smashing protection support using GCCs
-	  -fstack-protector-all option.
-
-	  See http://www.linuxfromscratch.org/hints/downloads/files/ssp.txt
-	  for details.
-
-	  Note that this requires the toolchain to have SSP
-	  support. This is always the case for glibc and eglibc
-	  toolchain, but is optional in uClibc toolchains.
-
-comment "enabling Stack Smashing Protection requires support in the toolchain"
-	depends on !BR2_TOOLCHAIN_HAS_SSP
-
-config BR2_PREFER_STATIC_LIB
-	bool "prefer static libraries"
-	help
-	  Where possible, build and use static libraries for the target.
-	  This potentially increases your code size and should only be
-	  used if you know what you do.
-	  The default is to build dynamic libraries and use those on
-	  the target filesystem.
-
-	  WARNING: This is highly experimental at the moment.
-
-config BR2_PACKAGE_OVERRIDE_FILE
-	string "location of a package override file"
-	default "$(CONFIG_DIR)/local.mk"
-	help
-	  A package override file is a short makefile that contains
-	  variable definitions of the form <pkg>_OVERRIDE_SRCDIR,
-	  which allows to tell Buildroot to use an existing directory
-	  as the source directory for a particular package. See the
-	  Buildroot documentation for more details on this feature.
-
-config BR2_GLOBAL_PATCH_DIR
-	string "global patch directories"
-	help
-	  You may specify a space separated list of one or more directories
-	  containing global package patches. For a specific version
-	  <packageversion> of a specific package <packagename>, patches are
-	  applied as follows:
-
-	  First, the default Buildroot patch set for the package is applied
-	  from the package's directory in Buildroot.
-
-	  Then for every directory - <global-patch-dir> - that exists in
-	  BR2_GLOBAL_PATCH_DIR, if the directory
-	  <global-patch-dir>/<packagename>/<packageversion>/ exists, then all
-	  *.patch files in this directory will be applied.
-
-	  Otherwise, if the directory <global-patch-dir>/<packagename> exists,
-	  then all *.patch files in the directory will be applied.
-
 endmenu
 
-source "toolchain/Config.in"
+menu "Real-Time"
+	source "package/rtai/Config.in"
+	source "package/xenomai/Config.in"
+endmenu
 
-source "system/Config.in"
+menu "Shell and utilities"
+comment "Shells"
+if BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
+	source "package/bash/Config.in"
+	source "package/dash/Config.in"
+	source "package/zsh/Config.in"
+endif
+comment "Utilities"
+	source "package/at/Config.in"
+	source "package/ccrypt/Config.in"
+	source "package/dialog/Config.in"
+	source "package/dtach/Config.in"
+	source "package/file/Config.in"
+	source "package/gnupg/Config.in"
+	source "package/gnupg2/Config.in"
+	source "package/inotify-tools/Config.in"
+	source "package/lockfile-progs/Config.in"
+	source "package/logrotate/Config.in"
+	source "package/logsurfer/Config.in"
+	source "package/pinentry/Config.in"
+	source "package/screen/Config.in"
+	source "package/sudo/Config.in"
+if BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
+	source "package/time/Config.in"
+endif
+	source "package/tmux/Config.in"
+if BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
+	source "package/which/Config.in"
+endif
+	source "package/xmlstarlet/Config.in"
+endmenu
 
-source "linux/Config.in"
+menu "System tools"
+	source "package/acl/Config.in"
+	source "package/attr/Config.in"
+if BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
+	source "package/bootutils/Config.in"
+	source "package/coreutils/Config.in"
+endif
+	source "package/cpuload/Config.in"
+if BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
+	source "package/dcron/Config.in"
+endif
+	source "package/dsp-tools/Config.in"
+	source "package/ftop/Config.in"
+	source "package/htop/Config.in"
+	source "package/iprutils/Config.in"
+	source "package/keyutils/Config.in"
+	source "package/kmod/Config.in"
+	source "package/lxc/Config.in"
+	source "package/monit/Config.in"
+	source "package/ncdu/Config.in"
+	source "package/numactl/Config.in"
+	source "package/nut/Config.in"
+	source "package/powerpc-utils/Config.in"
+	source "package/polkit/Config.in"
+if BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
+	source "package/procps-ng/Config.in"
+	source "package/psmisc/Config.in"
+endif
+	source "package/pwgen/Config.in"
+	source "package/quota/Config.in"
+if BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
+	source "package/rsyslog/Config.in"
+endif
+	source "package/smack/Config.in"
+	source "package/supervisor/Config.in"
+if BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
+	source "package/sysklogd/Config.in"
+endif
+	source "package/systemd/Config.in"
+if BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
+	source "package/sysvinit/Config.in"
+endif
+	source "package/util-linux/Config.in"
+endmenu
 
-source "package/Config.in"
-
-source "fs/Config.in"
-
-source "boot/Config.in"
-
-source "package/Config.in.host"
-
-source "Config.in.legacy"
-
-menu "User-provided options"
-	depends on BR2_EXTERNAL != "support/dummy-external"
-
-source "$BR2_EXTERNAL/Config.in"
+menu "Text editors and viewers"
+	source "package/ed/Config.in"
+	source "package/joe/Config.in"
+if BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
+	source "package/less/Config.in"
+endif
+	source "package/nano/Config.in"
+	source "package/uemacs/Config.in"
+if BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
+	source "package/vim/Config.in"
+endif
+endmenu
 
 endmenu
